@@ -4,6 +4,8 @@
 
 const electionPromise = d3.csv('./data/senateRExport10.csv')
 
+console.log("got here")
+
 electionPromise.then(allElections => {
     
     function generateCharts(start, stop){
