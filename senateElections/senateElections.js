@@ -525,7 +525,24 @@ electionPromise.then(allElections => {
         // add a rect for showing legend explaining color of bars:
         // var colorScale = d3.scale.linear()
         //     .domain([0, 50, 100])
-        //     .range(["yellow", "green", "orange", "violet"])    
+        //     .range(["yellow", "green", "orange", "violet"]) 
+        
+        svgArea.append('text')
+            .attr('id', "barColorExplained")
+            .attr('x', 60)
+            .attr("y", barSVGHeight-31)
+            .text('Bar Colors indicate % of wins by party.  Deep blue = 100% Democrat, deep red = 100%')
+            .style("font-size", "14")
+            .style("font-weight", '400')
+        
+            svgArea.append('text')
+            .attr('id', "barColorExplained")
+            .attr('x', 60)
+            .attr("y", barSVGHeight-17)
+            .text('Republican, grey = 50% each.')
+            .style("font-size", "14")
+            .style("font-weight", '400')
+        
     }
 
     // Accept slider input for new year range
