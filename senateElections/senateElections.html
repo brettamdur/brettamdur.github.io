@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senate Elections</title>
+    <base href="/senateElections/">
+    <link rel="stylesheet" href="./senateElections.css">
+    <link rel="stylesheet" href="./el-checkbox-master/dist/checkbox.css">
+
+
+</head>
+<body>
+    <div id="container">
+        <div id="heading">
+            <h1>How Competitive Are Senate Elections in Your State?</h1>
+            <p></p><p></p>
+        </div>
+        
+        <div class="outerbox">
+            <div class="innerbox" id="innerbox1">
+                <div>
+                    <div id="boxtitle">Choose Lines to Display</div>
+                </div> 
+                <div id="toggleareaholder">
+                    <div class="toggleArea">
+                        <span class="margin-r">Winner Margin: Nationwide</span>
+                        <div class="break"></div>
+                            <label class="el-switch el-switch-sm">
+                                <input type="checkbox" name="natmargin" id="natmargin">
+                                <span class="el-switch-style""></span>
+                            </label>
+                    </div>
+                    <div class="toggleArea">
+                        <span class="margin-r">Winner Margin: State</span>
+                        <label class="el-switch el-switch-sm">
+                            <input type="checkbox" name="statemargin" id="statemargin">
+                            <span class="el-switch-style"></span>
+                        </label><br>
+                    </div>
+                    <div class="toggleArea">
+                        <div class="break"></div>
+                        <span class="margin-r">Trend: Nationwide</span>
+                        <label class="el-switch el-switch-sm">
+                            <!-- Trend: Nationwide -->
+                            <input type="checkbox" name="nattrend" id="nattrend">
+                            <span class="el-switch-style"></span>
+                        </label><br>
+                    </div>
+                    <div class="toggleArea">
+                        <span class="margin-r">Trend: State</span>
+                        <label class="el-switch el-switch-sm">
+                        <!--     Trend: State -->
+                            <input type="checkbox" name="statetrend" id="statetrend">
+                            <span class="el-switch-style"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="horzspacer"></div>
+            <div class="innerbox" id="innerbox2">
+                <div id="boxtitle">Choose Year Range</div>
+                <div id="sliderarea">
+                    <div id="horzspacer"></div>
+                    <tc-range-slider 
+                            id="slider"
+                            value1="1976"
+                            value2="2022"
+                            min="1976" 
+                            max="2022" 
+                            step="2"
+
+                            slider-height="10px"
+                            slider-bg="lightgrey"
+                            slider-bg-fill="dodgerblue"
+
+                            pointer-border="1px solid blue"
+                            pointer-border-hover="4px solid red"
+                            pointer-border-focus="2px solid black"
+
+                            pointers-min-distance="4"
+                            
+                            moving-tooltip="true"
+                            moving-tooltip-distance-to-pointer="-40"
+                            moving-tooltip-width="35"
+                            moving-tooltip-height="30"
+                            moving-tooltip-bg="dodgerblue"
+                            moving-tooltip-text-color="#efefef"></tc-range-slider>
+                            <div id="horzspacer"></div>
+                </div>
+                <div id="toolcool_scripts">
+                    <script src="./node_modules/toolcool-range-slider/dist/plugins/tcrs-marks.min.js"></script>
+                    <script src="./node_modules/toolcool-range-slider/dist/plugins/tcrs-moving-tooltip.min.js"></script>
+                    <script src="./node_modules/toolcool-range-slider/dist/plugins/tcrs-generated-labels.min.js"></script>
+                    <script src="./node_modules/toolcool-range-slider/dist/toolcool-range-slider.min.js"></script>
+                </div>
+            </div>
+        </div>
+    
+        
+        <div id="smallMults"></div>
+
+        <div id="allStatesBarChartArea"></div>
+        
+    </div>
+    <p></p>
+
+    <div id="scripts">
+        <script src="../master_d3/d3_min_lib/d3.min.js"></script>
+        <script src="./senateElections.js"></script>    
+        <script src="https://unpkg.com/d3-regression@0.0.6/dist/d3-regression.min.js"></script>
+        <script src="https://unpkg.com/simple-statistics@7.8.0/dist/simple-statistics.min.js">
+        </script>
+    </div>
+  
+</script>
+</body>
+</html>

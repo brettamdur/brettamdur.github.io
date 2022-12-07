@@ -1,0 +1,131 @@
+*{
+    font-family: 'Inter';
+    align-items: center;
+}
+
+#container{
+    margin-left: 20px;
+    margin-top: 10px;
+    justify-self: center;
+}
+
+.outerbox{
+    width: 800px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.innerbox{
+    margin: 10px 0px 10px 0px;
+    border-style: solid; 
+    border-width:1px; 
+    border-color: lightgray;
+    background-color: snow;
+    font-size: 14px;
+    min-height: 110px;
+    align-items:baseline;
+}
+
+#toggleareaholder{
+    display: flex;
+}
+
+#innerbox1{
+    flex: 10;
+    padding:5px 10px 0px 10px;
+    /* align-items: baseline; */
+}
+
+#horzspacer{
+    flex: 2;
+}
+
+#innerbox2{
+    flex: 10;
+    padding: 5px 0px 0px 15px;
+    justify-content: center;
+}
+
+.toggleArea {
+    display: block;
+    /* align-items:baseline; */
+    margin: 15px 15px 15px 15px;
+    font-size: 12px;
+}
+
+#sliderarea{
+    padding: 0px, 0px, 0px, 20px;
+    display:inline-block;
+    align-content: center;
+}
+
+#slider{
+    margin: 80px 0px 10px 40px; 
+}
+
+/* .break {
+    flex-basis: 100%;
+    height: 0;
+} */
+
+#boxtitle{
+    font-weight: 600;
+    font-size: 14px;
+    width: "100%"
+    /* margin-right: 10px; */
+}
+
+#horzspacer{
+    width: 20px;
+}
+
+.yAxis{
+    /* The 10px for the y is the .top value from js.  Need to figure out how to coordinate these. */
+    transform: translate(22px, 10px);
+}
+
+#smallMults{
+    margin-top: 25px;
+    max-width: 850px;
+}
+
+.xAxis{
+    transform: translate(0px, 160px);
+}
+
+.axis line {
+    fill: none;
+    stroke: lightgrey;
+    shape-rendering: crispEdges;
+}
+
+/* #marginlabel{
+    transform: translate(22, 100) rotate(10)
+} */
+
+path{
+    stroke: lightgray
+}
+
+.tick{
+    opacity: 0.7;
+}
+
+.tick line{
+    opacity: 0.0;
+}
+
+legend {
+    /* background-color: #21A1FF; */
+    background-color: dodgerblue;
+    color: white;
+    padding: 2px;
+    font-size: 16px;
+}
+
+.electioninfotext{
+    fill: white;
+    text-anchor: start;
+    font-size: 12px;
+    font-weight: 500;
+}
