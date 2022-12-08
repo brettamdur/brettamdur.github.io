@@ -11,6 +11,17 @@
     margin: auto;
 }
 
+#heading{
+    display: flex
+}
+
+#subheading{
+    font-size: 10px;
+    margin: auto;
+    text-align: center;
+
+}
+
 .outerbox{
     width: 800px;
     display: flex;
@@ -132,9 +143,3 @@ legend {
     font-weight: 500;
 }
 
-#subheading{
-    font-size: 10px;
-    margin: auto;
-    text-align: center;
-
-}
