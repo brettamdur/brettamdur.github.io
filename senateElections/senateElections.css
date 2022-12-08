@@ -37,40 +37,28 @@
 }
 
 .outerbox{
-    width: 800px;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .innerbox{
-    margin: 10px 0px 10px 0px;
+    margin: 10px 40px 10px 0px;
     border-style: solid; 
     border-width:1px; 
     border-color: lightgray;
     background-color: snow;
     font-size: 14px;
     min-height: 110px;
-    align-items:baseline;
+}
+
+#innerbox1{
+    width: 40%;
+    flex: 1;
+    padding:5px 10px 0px 10px;
 }
 
 #toggleareaholder{
     display: flex;
-}
-
-#innerbox1{
-    flex: 10;
-    padding:5px 10px 0px 10px;
-    /* align-items: baseline; */
-}
-
-#horzspacer{
-    flex: 2;
-}
-
-#innerbox2{
-    flex: 10;
-    padding: 5px 0px 0px 15px;
-    justify-content: center;
 }
 
 .toggleArea {
@@ -79,6 +67,15 @@
     margin: 15px 15px 15px 15px;
     font-size: 12px;
 }
+
+
+#innerbox2{
+    width: 40%;
+    flex: 1;
+    padding: 5px 0px 0px 15px;
+    justify-content: center;
+}
+
 
 #sliderarea{
     padding: 0px, 0px, 0px, 20px;
@@ -112,8 +109,11 @@
 }
 
 #smallMults{
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 25px;
     max-width: 900px;
+    justify-content: center;
 }
 
 .xAxis{
