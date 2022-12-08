@@ -531,7 +531,7 @@ electionPromise.then(allElections => {
             .attr('id', "barColorExplained")
             .attr('x', 60)
             .attr("y", barSVGHeight-31)
-            .text('Bar Colors indicate % of wins by party.  Deepest blue = 100% Democrat, deepest red = 100%')
+            .text('Bar colors indicate % of wins by party.  Deepest blue = 100% Democrat, deepest red = 100%')
             .style("font-size", "14")
             .style("font-weight", '400')
         
