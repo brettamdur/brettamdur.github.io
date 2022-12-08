@@ -7,6 +7,8 @@
     margin-left: 20px;
     margin-top: 10px;
     justify-self: center;
+    max-width: 850px;
+    margin: auto;
 }
 
 .outerbox{
@@ -86,7 +88,7 @@
 
 #smallMults{
     margin-top: 25px;
-    max-width: 850px;
+    max-width: 900px;
 }
 
 .xAxis{
@@ -128,4 +130,11 @@ legend {
     text-anchor: start;
     font-size: 12px;
     font-weight: 500;
+}
+
+#subheading{
+    font-size: 10px;
+    margin: auto;
+    text-align: center;
+
 }
