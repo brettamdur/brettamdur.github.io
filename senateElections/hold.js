@@ -1,7 +1,3 @@
-
-
-/* I spent almost a full day trying to figure out how to extract the value out of a Promise.  electionPromise is a Promise.  You can use its .then method to get to the data associated with the fulfilled Promise, but I can't figure out how to "return" the data.  The .then method also returns a Promise.  Grrrr. So instead I'm doing everything inside the .then block. As best I can tell, this is the way it's done by others, too.  Just feels odd to have to do everything inside the .then block, versus returning the data through a call to .then. */
-
 const electionPromise = d3.csv('./data/senateRExport10.csv')
 
 electionPromise.then(allElections => {
@@ -29,40 +25,13 @@ electionPromise.then(allElections => {
         const allYears = new Set
         filteredElections.forEach(e => {
             allYears.add(e.year)
-        })        
-
-        // electionPromise is the Promise.  allElections is its data. the then() method takes the promise's data as its first parameter.  So again, above is electionPromise.then(function(allElections){dostuff})
-        
-        // Generate a list of all states in the dataset
-        /* const stateList = new Set()
-        allElections.forEach(election => {
-            stateList.add(election.state)
-        });
-
-            // electionsByState is an array of 50 arrays, one for each state. Each state array is an array of objects.  Each object is an election. 
-        const electionsByState = []
-        stateList.forEach(state => {
-            thisState = allElections.filter(election => election.state == state)
-            electionsByState.push(thisState)
-        }) */
-
-        // Well, that was fun (block above).  Here's a way to do the same thing in one line.  See https://github.com/d3/d3-array/blob/main/README.md#group
+        })       
 
 
         const electionsByState = d3.group(filteredElections, d => d.state);
         const electionsByYear = d3.group(filteredElections, d => d.year);
         
-        // Here's how to access an element of the map:
-        // console.log(electionsByState.get("ALABAMA"))
-
-        // electionsByState is an "InternMap".  It's an iterable "map", where each element in the map is the data associated with one state. The key of each state element is the state name and the value is an array of objects, one object for each election in that state.
-    
-        // Here's the syntax for looping and getting the keys and values separately, vs getting the whole object:
-        // electionsByState.forEach((value, key) => {
-        //    console.log(key + " = " + value);
-
-
-        // set the dimensions of the svg
+        
         svgWidth = 210
         svgHeight = 210 
 
@@ -221,7 +190,7 @@ electionPromise.then(allElections => {
                 // only include min and max axis labels:
                 .tickValues([startYear, stopYear])
                 // below turns number into string, somehow
-                //.tickFormat(d3.format("d"))
+                .tickFormat(d3.format("d"))
             const xAxis = stateSvg.append("g")
                 .attr("class", "xAxis")
                 .style("font-weight", '100')
@@ -254,25 +223,6 @@ electionPromise.then(allElections => {
 
             // Add the nat wvs average line
 
-            // this was the version I used before changing to allow for persistent lines after date range change
-            /* const natMarginBox = document.querySelector("#natmargin")
-            natMarginBox.addEventListener('change', () => {  
-                if(natMarginBox.checked){
-                    const natAvg = yScale(avgWVS)
-                    natMarginLine = stateSvg.append("line")  
-                    .attr("id", "natMarginLine")
-                    .attr("x1", 22)
-                    .attr("y1", natAvg + margin.top)
-                    .attr("x2", width)
-                    .attr("y2", natAvg + margin.top)
-                    .style("stroke-width", "2")
-                    .style("stroke", "gray")
-                }
-                else{
-                    d3.select("#natMarginLine").remove()
-                }
-            })  */
-
             const natMarginBox = document.querySelector("#natmargin");
             function updateNatMarginLine(){
                 if(natMarginBox.checked){
@@ -294,8 +244,7 @@ electionPromise.then(allElections => {
             natMarginBox.addEventListener('change', () => {  
                 updateNatMarginLine();
             })
-
-            
+ 
             // Add the state wvs average line
             const stateMarginBox = document.querySelector("#statemargin")
             function updateStateMarginLine(){
@@ -335,7 +284,6 @@ electionPromise.then(allElections => {
                     y: regYValues[i]
                 }))
 
-                // ss.linearRegression returns an object with the slope and y intercept for the regression line associated with the data that gets passed to it (here, regData).  For some reason we convert the circles from objects to arrays using the map function.  Why didn't we just make them arrays in the first place?  Also, I think we're using a variable name here, for both linearRegression and linearRegressionLine, that is equivilent to the ss function we're calling.  So confusing.
                 linearRegression = ss.linearRegression(regData.map(d => [d.x, d.y]))
                 // given any value, ss.linerRegressionLine is function that will use the x and y intercpet values you pass to it to return a new value. 
                 linearRegressionLine = ss.linearRegressionLine(linearRegression)
@@ -349,12 +297,7 @@ electionPromise.then(allElections => {
                     x: d,                       
                     y: linearRegressionLine(d)
                 }));
-                
-
-                // version online uses scaled version of d.x and d.y, but I've already scaled the values above.
-                /* line = d3.line()
-                .x(d => (d.x))
-                .y(d => (d.y)) */
+            
 
                 // - render the line
                 const thisLine = stateSvg.append("line")
@@ -544,25 +487,16 @@ electionPromise.then(allElections => {
             .style("font-weight", '400')
         
         /*********************************************/
-        /************ SOME STUFF ADDED BY COPILOT ****/
+        /************ ADDED BY COPILOT ***************/
         /*********************************************/
-        // build line chart showing average winner margin by year
+        // build dot chart showing average winner margin by year
 
         // for each year in electionsbyYear, get the average of winnerVSecond
-        console.log(electionsByYear)
         const avgWVSByYear = [];
         electionsByYear.forEach((value, key) => {
             const avgWVS = d3.mean(value.map(d => d.winnerVSecond))
             avgWVSByYear.push([key, avgWVS])
         })
-
-        // for some reason, the .data property in d3 won't take avgwvsbyyear as a map, so we have to convert it to an array of objects
-        const avgWVSByYearArray = Array.from(avgWVSByYear, ([year, avgWVS]) => ({year, avgWVS}))
-        // convert year to a string
-        avgWVSByYearArray.forEach(d => d.year = d.year.toString())
-        // sort avgWVSByYearArray by year ascending
-        avgWVSByYearArray.sort((a, b) => a.year - b.year)
-        console.log(avgWVSByYearArray)
 
         var dotSVGWidth = svgWidth * 3 + 55,
             dotSVGHeight = svgHeight * 2,
@@ -572,6 +506,9 @@ electionPromise.then(allElections => {
             marginAreaHeight = dotSVGHeight - dotMargin.top - dotMargin.bottom,
             dotChartAreaWidth = dotSVGWidth - dotPadding.left - dotPadding.right,
             dotChartAreaHeight = dotSVGHeight - dotPadding.top - dotPadding.bottom;
+        
+        // first, get the data for the dot chart
+        avgWVSByYear2 = avgWVSByYear
 
         // set up the svg area for the dot chart
         svgArea2 = d3.select("#dotChartArea").append('svg')
@@ -583,120 +520,29 @@ electionPromise.then(allElections => {
                 .attr("id", "chartArea2")
                 .attr("transform",
                     "translate(" + dotPadding.left + "," + dotPadding.top + ")")
-    
+        allDots = chartArea2.selectAll('circle')
+                .data(avgWVSByYear)
+                .join('circle')
+        console.log(allDots)
+
         // set up the scales for the dot chart
         xScaleDots = d3.scaleLinear()
-            .domain([startYear, stopYear])
+            .domain([1976, 2022])
             .range([0, dotChartAreaWidth])
-            // create one tick mark for each year
-            
         yScaleDots = d3.scaleLinear()   
             .domain([0, 100])
-            .range([0, dotChartAreaHeight])
-
-        // Add a line connecting each of the dots
-        var line = d3.line()
-        chartArea2.append("path")
-            .datum(avgWVSByYearArray)
-            .attr("d", d3.line()
-                .x(d => xScaleDots(d.year)+4)
-                .y(d => yScaleDots(d.avgWVS))
-            )
-            .attr("fill", "none")
-            .attr("stroke", "yellow")
-            .attr("stroke-width", 3)
+            .range([dotChartAreaHeight, 0])
 
         // render the dots
-        allDots = chartArea2.selectAll('circle')
-                .data(avgWVSByYearArray)
-                .join('circle')
         allDots.each((d, i, n) => {
-            console.log(d.year, d.avgWVS);
             elem = d3.select(n[i])
                 .attr("id", d[0])
-                .attr("cx", xScaleDots(d.year)+4)
-                .attr("cy", yScaleDots(d.avgWVS))
-                .attr("r", 6)
-                .style("fill", "cornflowerblue");
-        })
+                .attr("cx", xScaleDots(d[0]))
+                .attr("cy", yScaleDots(d[1]))
+                .attr("r", 3)
+                .style("fill", "darkblue");
+        })        
 
-        // show the avgWVS value when mouse hovers over a dot
-        allDots.on("mouseover", function(d) {
-            console.log(d)
-            d3.select(this)
-                .attr("r", 10)
-                .style("fill", "yellow")
-            svgArea2.append("text")
-                .attr("id", "dotValue")
-                .attr("x", xScaleDots(d.target.__data__.year)+4)
-                .attr("y", yScaleDots(d.target.__data__.avgWVS)+10)
-                // .text(d.avgWVS.toFixed(1))
-                //.text(d.target.__data__.avgWVS)
-                .text(() => "Hello\nWorld"
-                    )
-                .style("font-size", "14")
-                .style("font-weight", '400')
-                .style("fill", "grey")
-        })
-        .on("mouseout", function(d) {
-            d3.select(this)
-                .attr("r", 6)
-                .style("fill", "cornflowerblue")
-            d3.select("#dotValue").remove()
-        })
-
-        // build x axis and labels
-        chartArea2.append("g")
-            .call(d3.axisBottom(xScaleDots).tickValues(avgWVSByYearArray.map(d => d.year)))
-            .attr("transform", "translate(2" + ',' + chartAreaHeight + ')')
-            .selectAll("text")
-                // convert year to string
-                .text(d => d.toString())
-                .attr("y", 0)
-                .attr("x", 0)
-                .attr("dy", ".35em")
-                .attr("transform", "translate(0, 40) rotate(-90)")
-                .style("text-anchor", "start")
-                .style("justify-content", "left")
-                .style("font-size", "10")
-                .style("fill", "black")
-                .style("font-weight", 400)
-                
-        // build y axis
-        chartArea2.append("g")
-            .call(d3.axisLeft(yScaleDots)
-                /* .tickFormat(function(d){
-                    return d + "%";
-                }) */
-            );
-
-        rightY2 = chartArea2.append("g")
-            .call(d3.axisRight(yScale)
-            // .attr("transform", "translate(50, 0)")            
-        );
-
-        rightY2.attr("transform", "translate(" + (chartAreaWidth + 12) + ", 0)")
-
-        // build y axis title
-        yPos = (dotChartAreaHeight / 2) + dotPadding.top
-        xPos = dotPadding.left / 2 
-        svgArea2.append("text")
-            .attr("id", "barYLabel")
-            // if you don't transform (below), rotation goes around the origin of the svg.  For a good explanation, see https://stackoverflow.com/questions/11252753/rotate-x-axis-text-in-d3
-            .attr("transform", "translate(" + xPos + "," + yPos +") rotate(-90)")
-            .attr("text-anchor", "middle")
-            .text("Avg. Winner Margin (% point difference)")
-            .style('fill', 'gray')
-            .style('font-size', '10px')
-            .style('font-weight', '400') 
-
-        // build Chart Title
-        svgArea2.append('text')
-            .attr("id", "charttitle")
-            .attr("y", 32)
-            .text("Average Winner Margin by Year for Selected Years: " + startYear + " - " + stopYear)
-            .style("font-size", "18")
-            .style("font-weight", '600')
     }
 
     // Accept slider input for new year range
