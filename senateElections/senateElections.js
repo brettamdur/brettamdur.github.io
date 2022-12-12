@@ -616,31 +616,30 @@ electionPromise.then(allElections => {
                 .attr("id", d[0])
                 .attr("cx", xScaleDots(d.year)+4)
                 .attr("cy", yScaleDots(d.avgWVS))
-                .attr("r", 6)
+                .attr("r", 4)
                 .style("fill", "cornflowerblue");
         })
 
         // show the avgWVS value when mouse hovers over a dot
         allDots.on("mouseover", function(d) {
-            console.log(d)
             d3.select(this)
                 .attr("r", 10)
                 .style("fill", "yellow")
             svgArea2.append("text")
                 .attr("id", "dotValue")
-                .attr("x", xScaleDots(d.target.__data__.year)+4)
+                .attr("x", xScaleDots(d.target.__data__.year)+35)
                 .attr("y", yScaleDots(d.target.__data__.avgWVS)+10)
                 // .text(d.avgWVS.toFixed(1))
                 //.text(d.target.__data__.avgWVS)
-                .text(() => "Hello\nWorld"
-                    )
+                .text(() => `${d.target.__data__.year}: ${d.target.__data__.avgWVS.toFixed(2)}%`)
+                .style("text-anchor", "start")
                 .style("font-size", "14")
                 .style("font-weight", '400')
                 .style("fill", "grey")
         })
         .on("mouseout", function(d) {
             d3.select(this)
-                .attr("r", 6)
+                .attr("r", 4)
                 .style("fill", "cornflowerblue")
             d3.select("#dotValue").remove()
         })
@@ -694,7 +693,7 @@ electionPromise.then(allElections => {
         svgArea2.append('text')
             .attr("id", "charttitle")
             .attr("y", 32)
-            .text("Average Winner Margin by Year for Selected Years: " + startYear + " - " + stopYear)
+            .text("Average Nationwide Winner Margin for Selected Years: " + startYear + " - " + stopYear)
             .style("font-size", "18")
             .style("font-weight", '600')
     }
