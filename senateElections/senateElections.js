@@ -229,7 +229,7 @@ electionPromise.then(allElections => {
                 // only include min and max axis labels:
                 .tickValues([startYear, stopYear])
                 // below turns number into string, somehow
-                //.tickFormat(d3.format("d"))
+                .tickFormat(d3.format("d"))
             const xAxis = stateSvg.append("g")
                 .attr("class", "xAxis")
                 .style("font-weight", '100')
@@ -260,26 +260,6 @@ electionPromise.then(allElections => {
                 .style('font-size', '12px')
                 .style('font-weight', '300') 
 
-            // Add the nat wvs average line
-
-            // this was the version I used before changing to allow for persistent lines after date range change
-            /* const natMarginBox = document.querySelector("#natmargin")
-            natMarginBox.addEventListener('change', () => {  
-                if(natMarginBox.checked){
-                    const natAvg = yScale(avgWVS)
-                    natMarginLine = stateSvg.append("line")  
-                    .attr("id", "natMarginLine")
-                    .attr("x1", 22)
-                    .attr("y1", natAvg + margin.top)
-                    .attr("x2", width)
-                    .attr("y2", natAvg + margin.top)
-                    .style("stroke-width", "2")
-                    .style("stroke", "gray")
-                }
-                else{
-                    d3.select("#natMarginLine").remove()
-                }
-            })  */
 
             const natMarginBox = document.querySelector("#natmargin");
             function updateNatMarginLine(){
