@@ -14,10 +14,18 @@ electionPromise.then(allElections => {
 
         function yearSet(startYear, stopYear){
             return allElections.filter(election => 
-                election.year >= startYear && election.year <= stopYear)        
+                    election.year >= startYear && 
+                    election.year <= stopYear 
+                    // exclude incumbent winners and runners-up
+                    // && election.incumbentWinner == "FALSE" && election.incumbentSecond == "FALSE" 
+                    // exclude unopposed elections
+                    // && election.winnerVSecond < 80 
+                   
+                )        
         }
 
         var filteredElections = yearSet(startYear, stopYear)
+        console.log(filteredElections)
         // hmmm ... I should probably change the state to OK vs excluding the special election
         filteredElections = filteredElections.filter(election => election.state != "OKLAHOMA - SPECIAL")
 
@@ -427,7 +435,7 @@ electionPromise.then(allElections => {
         avgWVSByState = avgWVSByState.sort(function(a, b){
             return d3.ascending(a[1], b[1])
         })
-        console.log(avgWVSByState)
+    
         yScale = d3.scaleLinear([0, 100], [0, chartAreaHeight])
         xScale = d3.scaleBand()
             .domain(avgWVSByState.map(e => e[0]))
@@ -544,12 +552,11 @@ electionPromise.then(allElections => {
             .style("font-weight", '400')
         
         /*********************************************/
-        /************ SOME STUFF ADDED BY COPILOT ****/
+        /************ BUILD ALLYEARS LINE CHART ****/
         /*********************************************/
-        // build line chart showing average winner margin by year
+        // line chart showing average winner margin by year
 
         // for each year in electionsbyYear, get the average of winnerVSecond
-        console.log(electionsByYear)
         const avgWVSByYear = [];
         electionsByYear.forEach((value, key) => {
             const avgWVS = d3.mean(value.map(d => d.winnerVSecond))
@@ -562,7 +569,6 @@ electionPromise.then(allElections => {
         avgWVSByYearArray.forEach(d => d.year = d.year.toString())
         // sort avgWVSByYearArray by year ascending
         avgWVSByYearArray.sort((a, b) => a.year - b.year)
-        console.log(avgWVSByYearArray)
 
         var dotSVGWidth = svgWidth * 3 + 55,
             dotSVGHeight = svgHeight * 2,
@@ -611,7 +617,6 @@ electionPromise.then(allElections => {
                 .data(avgWVSByYearArray)
                 .join('circle')
         allDots.each((d, i, n) => {
-            console.log(d.year, d.avgWVS);
             elem = d3.select(n[i])
                 .attr("id", d[0])
                 .attr("cx", xScaleDots(d.year)+4)
