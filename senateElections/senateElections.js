@@ -16,8 +16,8 @@ electionPromise.then(allElections => {
             return allElections.filter(election => 
                     election.year >= startYear && 
                     election.year <= stopYear 
-                    // exclude incumbent winners and runners-up
-                    // && election.incumbentWinner == "FALSE" && election.incumbentSecond == "FALSE" 
+                    // exclude / include  incumbent winners and runners-up
+                    // && (election.incumbentWinner == "FALSE" &&election.incumbentSecond == "FALSE") 
                     // exclude unopposed elections
                     // && election.winnerVSecond < 80 
                    
@@ -589,8 +589,9 @@ electionPromise.then(allElections => {
                 .y(d => yScaleDots(d.avgWVS))
             )
             .attr("fill", "none")
-            .attr("stroke", "yellow")
-            .attr("stroke-width", 3)
+            // change the color of the line to blue
+            .style("stroke", "lightgray")
+            .attr("stroke-width", 2)
 
         // render the dots
         allDots = chartArea2.selectAll('circle')
