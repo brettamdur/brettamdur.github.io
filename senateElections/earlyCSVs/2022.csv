@@ -1,0 +1,35 @@
+﻿stateAbb,state,dPct, rPct ,oPct, votesReported ,dCandidate,rCandidate,oCandidate
+AL,Alabama,0.31,0.67,0.02,0.98,Will Boyd,Katie Britt,
+AZ,Arizona,0.51,0.47,0.02,0.98,Mark Kelly,Blake Masters,
+AR,Arkansas,0.31,0.66,0.03,0.99,Natalie James,John Boozeman,
+CA,California,0.61,0.39,0,0.7,Alex Padilla,Mark Meuser,
+CO,Colorado,0.56,0.41,0.02,0.99,Michael Bennett,John O'Dea,
+CT,Connecticut,0.58,0.42,0,0.99,Richard Blumenthal,Leora Levy,
+FL,Florida,0.41,0.58,0,0.99,Val Demmings,Marco Rubio,
+HI,Hawaii,0.71,0.26,0.01,0.99,Brian Schatz,Bob McDermott,
+ID,Idaho,0.29,0.61,0.08,0.99,David Roth,Mike Crapo,
+IL,Illinois,0.56,0.42,0.02,0.98,Tammy Duckworth,Kathy Salvi,Bill Redpath
+IN,Indiana,0.38,0.59,0.03,0.99,Thomas McDermott,Todd Young,James Sceniak
+IA,Iowa,0.44,0.56,0,0.99,Michael Franken,Chuck Grassley,
+KS,Kansas,0.37,0.6,0.03,0.99,Mark Holland,Jerry Moran,David Graham
+KY,Kentucky,0.38,0.62,0,0.99,Charles Booker,Rand Paul,
+LA,Louisiana,0.18,0.62,0.01,0.99,Gary Chambers,John Kennedy,
+MD,Maryland,0.64,0.36,0,0.94,Chris Van Hollen,Chris Chaffee,
+MO,Missouri,0.42,0.55,0.02,0.99,Trudy Busch Valentine,Eric Schmitt,
+NV,Nevada,0.49,0.48,0.01,0.99,Catherine Cortez Masto,Adam Laxalt,
+NH,New Hampshire,0.54,0.44,0.02,0.99,Maggie Hassen,Donold Bolduc,
+NY,New York,0.56,0.43,0,0.95,Charles Schumer,Joe Pinion,Diane Sare
+NC,North Carolina,0.47,0.51,0.01,0.99,Cheri Beasley,Ted Budd,
+ND,North Dakota,0.25,0.56,0.19,0.99,Katrina Christiansen,John Hoeven,
+OH,Ohio,0.47,0.53,0,0.99,Tim Ryan,JD Vance,
+OK,Oklahoma,0.32,0.64,0.02,0.99,Madison Horn,James Lankford,
+OK-S,Oklahoma - Special,0.35,0.62,0.02,0.99,Kendra Horn,Markwayne Mullin,
+OR,Oregon,0.56,0.41,0.02,0.96,Ron Wyden,Jo Rae Perkins,
+PA,Pennsylvania,0.51,0.47,0.01,0.98,John Fetterman,Mehmet Oz,
+SC,South Carolina,0.37,0.63,0,0.99,Krystle Matthews,Tim Scott,
+SD,South Dakota,0.26,0.7,0.04,0.99,Brian Bengs,John Thune,Tamara Lesnar
+UT,Utah,0,0.54,0.42,0.93,Evan McMullin,Mike Lee,
+VT,Vermont,0.69,0.28,0.01,1,Peter Welch,Gerald Malloy,
+WA,Washington,0.57,0.43,0,0.93,Patty Murray,Tiffany Smiley,
+WI,Wisconsin,0.5,0.5,0,0.99,Mandela Barnes,Ron Johnson,
+GA ,Georgia,0.51,0.49,0,1,Raphael Warnock,Herschel Walker,
