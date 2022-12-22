@@ -15,7 +15,7 @@
 
 
 /* const electionPromise = d3.csv('./data/test.csv') */
-const electionPromise = d3.csv('./data/senateRExport.csv')
+const electionPromise = d3.csv('./data/senateRExport.csv') 
 
 electionPromise.then(allElections => {
     
