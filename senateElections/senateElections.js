@@ -3,18 +3,6 @@
 /* I spent almost a full day trying to figure out how to extract the value out of a Promise.  electionPromise is a Promise.  You can use its .then method to get to the data associated with the fulfilled Promise, but I can't figure out how to "return" the data.  The .then method also returns a Promise.  Grrrr. So instead I'm doing everything inside the .then block. As best I can tell, this is the way it's done by others, too.  Just feels odd to have to do everything inside the .then block, versus returning the data through a call to .then. */
 
 // read ./data/test.csv into electionPromise
-// const file = new File([""], "senateRExport.csv", {type: "text/csv"});
-// const reader = new FileReader();
-
-// reader.onload = function(event) {
-//   const csv = event.target.result;
-//   console.log(csv);
-// };
-
-// reader.readAsText(file);
-
-
-/* const electionPromise = d3.csv('./data/test.csv') */
 const electionPromise = d3.csv('./data/senateRExport.csv') 
 
 electionPromise.then(allElections => {
