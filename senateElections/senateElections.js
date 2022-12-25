@@ -15,8 +15,8 @@ electionPromise.then(allElections => {
 
         function yearSet(startYear, stopYear){
             return allElections.filter(election => 
-                    election.year >= startYear && 
-                    election.year <= stopYear 
+                    election.year >= startYear 
+                    && election.year <= stopYear 
                     // exclude / include  incumbent winners and runners-up
                     // && (election.incumbentWinner == "FALSE" &&election.incumbentSecond == "FALSE") 
                     // exclude unopposed elections
@@ -26,7 +26,6 @@ electionPromise.then(allElections => {
         }
 
         var filteredElections = yearSet(startYear, stopYear)
-        console.log(filteredElections)
         // hmmm ... I should probably change the state to OK vs excluding the special election
         filteredElections = filteredElections.filter(election => election.state != "OKLAHOMA - SPECIAL")
 
@@ -60,6 +59,9 @@ electionPromise.then(allElections => {
 
         const electionsByState = d3.group(filteredElections, d => d.state);
         const electionsByYear = d3.group(filteredElections, d => d.year);
+
+
+
         
         // Here's how to access an element of the map:
         // console.log(electionsByState.get("ALABAMA"))
@@ -580,6 +582,8 @@ electionPromise.then(allElections => {
         yScaleDots = d3.scaleLinear()   
             .domain([0, 100])
             .range([0, dotChartAreaHeight])
+
+        console.log(avgWVSByYearArray)
 
         // Add a line connecting each of the dots
         var line = d3.line()
