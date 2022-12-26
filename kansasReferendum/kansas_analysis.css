@@ -2,7 +2,11 @@
     font-family: 'Inter';
 }
 
-#titleimage{}
+#titleimage{
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
 
 #container{
     margin-left: 20px;
