@@ -66,3 +66,15 @@
     text-align: center;
 
 }
+
+#contentsbox{
+    float: right;
+    border: 1px solid #000000;
+    width: 40%;
+    background-color: lightgray;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-left: 7px;
+    padding-top: 5px;
+    padding-right: 7px;
+}
