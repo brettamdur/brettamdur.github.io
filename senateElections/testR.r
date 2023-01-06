@@ -113,6 +113,12 @@ allYears <- allYears %>% mutate(incumbentRunning = if_else(
               TRUE, FALSE
             ))
 
+// add column to allYears called group.  It is "group1" if the year is < 1998, "group2" if the year is >= 1998
+allYears <- allYears %>% mutate(group = if_else(year < 1998, "group1", "group2"))
+
+// create a new dataframe of only the winnerVSecond and group columns of allYears
+allYearsWV2 <- allYears %>% select(winnerVSecond, group)
+
 # what is the mean of wv2 in races with and without incumbents?
 mean(allYears %>% 
        filter(year >= 1982 & incumbentRunning == TRUE & winnerVSecond < 80) %>% 
@@ -120,6 +126,18 @@ mean(allYears %>%
 
 yearlyAll <- genYearlyData(allYears)
 colnames(yearlyAll) <- c("year", "WVALLAll", "WVSecondAll")
+
+// split yearlyAll into two dataframes, before 1998 and >= 1998
+yearlyAllBefore1998 <- genYearlyData(allYears %>% filter(year < 1998))
+
+#split yearlyAll into first section and second section for variance analysis
+yearlyAllBefore1998 <- yearlyAll %>% filter(year < 1998)
+yearlyAllBefore1998_numeric <- as.numeric(yearlyAllBefore1998$WVSecondAll)
+yearlyAll1998AndAfter <- yearlyAll %>% filter(year >= 1998)
+yearlyAll1998AndAfter_numeric <- as.numeric(yearlyAll1998AndAfter$WVSecondAll)
+
+// delete second column from yearlyAllBefore1998_numeric
+yearlyAllBefore1998_numeric <- yearlyAllBefore1998_numeric[-2]
 
 # create separate dataframes for onlyIncumbents and noIncumbents
 yearlyIncumbentsOnly <- genYearlyData(
@@ -263,4 +281,18 @@ ggplot(data = yearlyAll, aes(x = WVSecondAllDiff, y = as.factor(year))) +
 // create a dummy dataframe with three columns and 10 rows
 df <- data.frame(x = c(1,2,3,4,5,6,7,8,9,10), 
 y = c(1,2,3,4,5,6,7,8,9,10), z = c(1,2,3,4,5,6,7,8,9, 10))
+
+
+// create graph that shows a dot for each winnervsecond value in allYears, with x = year and y = winnervsecond, and add a line for each year that shows the average winnervsecond for that year, and reverse the direction of the y axis() so that zero is at the top.
+ggplot(data = allYears, aes(x = year, y = winnerVSecond)) +
+  geom_point() +
+  geom_line(aes(y = mean(winnerVSecond)), color = "red") +
+  scale_y_reverse() +
+  theme(panel.background = element_blank(), plot.background = element_blank())
+
+
+
+
+
+
 
