@@ -1,5 +1,15 @@
-*{
+/* *{
     font-family: 'Inter';
+}
+
+#draft{
+    
+}
+
+#datebyline{
+    font-size: 14px;
+    font-weight: 400;
+    align-self: flex-end;
 }
 
 #container{
@@ -31,6 +41,72 @@
     font-size: 18px;
     font-weight: 400;
 }
+
+#subtitle{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#headingimage{
+    flex-grow: 1;
+}
+
+#subheading{
+    font-size: 10px;
+    margin: auto;
+    text-align: left;
+
+} */ 
+
+/* GROUP 2 */
+
+#titleimage{
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+#container{
+
+    max-width: 850px;
+    margin: auto; 
+}
+
+#heading{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+#articletitle{
+    width: 50%;
+    flex-grow: 1;
+    margin-right: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#articletitle_main{
+    font-size: 35px;
+    font-weight: 700;
+    align-self: flex-start;
+}
+
+#subtitle{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#datebyline{
+    font-size: 14px;
+    font-weight: 400;
+    align-self: flex-end;
+}
+
 
 #headingimage{
     flex-grow: 1;
