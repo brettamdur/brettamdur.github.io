@@ -10,6 +10,7 @@ library(car)
 library(dplyr)
 library(alr3)
 library(faraway)
+library(data.table)
 
 ogSenateData <- read.csv('./earlyCSVs/1976-2020-senate.csv')
 
@@ -277,6 +278,7 @@ ggplot(data = allYears, aes(x = year, y = winnerVSecond)) +
               summarize(meanWVSecond = mean(winnerVSecond)), aes(x = year, y = meanWVSecond), color = "red") +
   scale_y_reverse() +
   theme(panel.background = element_blank(), plot.background = element_blank())    
+
 
 
 
