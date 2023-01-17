@@ -279,6 +279,17 @@ ggplot(data = allYears, aes(x = year, y = winnerVSecond)) +
   scale_y_reverse() +
   theme(panel.background = element_blank(), plot.background = element_blank())    
 
+# create two dataframes, one for each value of winnerVSecond in yearlyAll, that contains all of the # columns in yearlyAll
+yearlyAll <- yearlyAll %>% mutate(group = ifelse(year <= 1996, "group1", "group2"))
+yearlyAllGroup1 <- yearlyAll %>% filter(group == "group1")
+yearlyAllGroup2 <- yearlyAll %>% filter(group == "group2")
+
+t.test(yearlyAllGroup1$WVSecondAll, yearlyAllGroup2$WVSecondAll, alternative = "two.sided", paired = FALSE, var.equal = FALSE)
+
+# for eaach row in yearlyAllGroup1, except the first, calculate the absolute value of the difference between the current row's WVSeceondAll and the previous row's winnerVSecond
+yearlyAllGroup1$WVSecondAllDiff <- c(NA, abs(diff(yearlyAllGroup1$WVSecondAll)))
+yearlyAllGroup2$WVSecondAllDiff <- c(NA, abs(diff(yearlyAllGroup2$WVSecondAll)))
+
 
 
 
