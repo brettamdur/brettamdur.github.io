@@ -129,73 +129,73 @@ electionPromise.then(allElections => {
                 .data(state)
                 .join('circle');
 
-                allCircles.each((d, i, n) => {
-                    const elem = d3.select(n[i]);
-                    // elem.attr("cx", margin.left + (width /state.length) + (i * 9))
-                    elem.attr("cx", xScale(d.year))
-                    .attr("cy", yScale(+d.winnerVSecond) + margin.top)
-                    .attr("r", 4)
-                    .attr("id", "electionCircle")
+            allCircles.each((d, i, n) => {
+                const elem = d3.select(n[i]);
+                // elem.attr("cx", margin.left + (width /state.length) + (i * 9))
+                elem.attr("cx", xScale(d.year))
+                .attr("cy", yScale(+d.winnerVSecond) + margin.top)
+                .attr("r", 4)
+                .attr("id", "electionCircle")
 
-                    // add the info box for each election / data point
-                    .on("click", function(event){
-                            electionInfo = d3.select(this.parentNode)
-                            infoTextLeftMargin = 6
-                            electionInfo.append("rect")
-                                .attr("class", "electioninfobox")
-                                .attr("x", 0)
-                                .attr("y", margin.top + 2)
-                                .attr("width", width + margin.left)
-                                .attr("height", height)
-                                .style("opacity", "80%")
-                            // see https://d3-wiki.readthedocs.io/zh_CN/master/Selections/ for good details on "subselections"
-                            thisRect = electionInfo.select("rect")
-                            if(d.winnerParty == "DEMOCRAT"){
-                                thisRect.style("fill", "blue")
+                // add the info box for each election / data point
+                .on("click", function(event){
+                        electionInfo = d3.select(this.parentNode)
+                        infoTextLeftMargin = 6
+                        electionInfo.append("rect")
+                            .attr("class", "electioninfobox")
+                            .attr("x", 0)
+                            .attr("y", margin.top + 2)
+                            .attr("width", width + margin.left)
+                            .attr("height", height)
+                            .style("opacity", "80%")
+                        // see https://d3-wiki.readthedocs.io/zh_CN/master/Selections/ for good details on "subselections"
+                        thisRect = electionInfo.select("rect")
+                        if(d.winnerParty == "DEMOCRAT"){
+                            thisRect.style("fill", "blue")
+                        } else{
+                            if(d.winnerParty == "REPUBLICAN"){
+                                thisRect.style("fill", "red")
                             } else{
-                                if(d.winnerParty == "REPUBLICAN"){
-                                    thisRect.style("fill", "red")
-                                } else{
-                                    thisRect.style("fill", "orange")
-                                }
+                                thisRect.style("fill", "orange")
                             }
-                            electionInfo.append("text")
-                                .attr("class", "electioninfotext")
-                                .attr("x", infoTextLeftMargin)
-                                .attr("y", margin.top + 20)
-                                .text("Year: " + d.year)
-                            electionInfo.append("text")
-                                .attr("class", "electioninfotext")
-                                .attr("x", infoTextLeftMargin)
-                                .attr("y", margin.top + 34)
-                                .text("Winner: " + d.winnerName)
-                            electionInfo.append("text")
-                                .attr("class", "electioninfotext")
-                                .attr("x", infoTextLeftMargin)
-                                .attr("y", margin.top + 48)
-                                .text("Winner Party: " + d.winnerParty)
-                            electionInfo.append("text")
-                                .attr("class", "electioninfotext")
-                                .attr("x", infoTextLeftMargin)
-                                .attr("y", margin.top + 62)
-                                .text("2nd Place: " + d.secondPlaceName)
-                            electionInfo.append("text")
-                                .attr("class", "electioninfotext")
-                                .attr("x", infoTextLeftMargin)
-                                .attr("y", margin.top + 76)
-                                // note first capital letter in "Second" (below).  Whoops.
-                                .text("2P Party: " + d.SecondPlaceParty)
-                            electionInfo.append("text")
-                                .attr("class", "electioninfotext")
-                                .attr("x", infoTextLeftMargin)
-                                .attr("y", margin.top + 90)
-                                .text("Winner % Point Margin: " + d3.format(".2f")(d.winnerVSecond))
-                            event.stopPropagation()
-                    })
+                        }
+                        electionInfo.append("text")
+                            .attr("class", "electioninfotext")
+                            .attr("x", infoTextLeftMargin)
+                            .attr("y", margin.top + 20)
+                            .text("Year: " + d.year)
+                        electionInfo.append("text")
+                            .attr("class", "electioninfotext")
+                            .attr("x", infoTextLeftMargin)
+                            .attr("y", margin.top + 34)
+                            .text("Winner: " + d.winnerName)
+                        electionInfo.append("text")
+                            .attr("class", "electioninfotext")
+                            .attr("x", infoTextLeftMargin)
+                            .attr("y", margin.top + 48)
+                            .text("Winner Party: " + d.winnerParty)
+                        electionInfo.append("text")
+                            .attr("class", "electioninfotext")
+                            .attr("x", infoTextLeftMargin)
+                            .attr("y", margin.top + 62)
+                            .text("2nd Place: " + d.secondPlaceName)
+                        electionInfo.append("text")
+                            .attr("class", "electioninfotext")
+                            .attr("x", infoTextLeftMargin)
+                            .attr("y", margin.top + 76)
+                            // note first capital letter in "Second" (below).  Whoops.
+                            .text("2P Party: " + d.SecondPlaceParty)
+                        electionInfo.append("text")
+                            .attr("class", "electioninfotext")
+                            .attr("x", infoTextLeftMargin)
+                            .attr("y", margin.top + 90)
+                            .text("Winner % Point Margin: " + d3.format(".2f")(d.winnerVSecond))
+                        event.stopPropagation()
+                })
 
-                    d.winnerParty == "DEMOCRAT" ? 
-                        elem.attr("fill", "blue") :
-                        d.winnerParty == "REPUBLICAN" ? elem.attr("fill", "red") : elem.attr("fill", "orange");
+                d.winnerParty == "DEMOCRAT" ? 
+                    elem.attr("fill", "blue") :
+                    d.winnerParty == "REPUBLICAN" ? elem.attr("fill", "red") : elem.attr("fill", "orange");
 
             })
 
