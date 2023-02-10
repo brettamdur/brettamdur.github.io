@@ -8,111 +8,221 @@
     <!-- <base href="/senateElections/"> -->
     <link rel="stylesheet" href="./electoralCollege.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <style>
+    </style> -->
 </head>
 <body>
-    <div id="container">
-        <div id="heading">
-            <div id="articletitle">
-                <div id="articletitle_main">
-                    <p> 
-                        The Electoral College Doesn't Favor Red States The Way You Think It Does
-                    </p>
-                    <p id="subtitle">
-                        If you think the candidate with the most votes should win, then sure, the Electoral College is unfair.  But if you also think that the Electoral College gives red states a big advantage, read on.
-                    </p>
+    <main>
+        <div id="container">
+            <div id="heading">
+                <div id="articletitle">
+                    <div id="articletitle_main">
+                        <p> 
+                            The Electoral College Doesn't Favor Red States The Way You Think It Does
+                        </p>
+                        <p id="subtitle">
+                            If you think the candidate with the most votes should win, then sure, the Electoral College is unfair.  But if you also think that the Electoral College gives red states a big advantage, read on.
+                        </p>
+                    </div>
+                    <div id="datebyline">
+                        <strong>DRAFT / WORK IN PROGRESS: NOT FOR DISTRIBUTION</strong>
+                    </div> 
                 </div>
-                <div id="datebyline">
-                    <strong>DRAFT / WORK IN PROGRESS: NOT FOR DISTRIBUTION</strong>
-                </div> 
+                <div id="headingImage">
+                    <img src="../images/voters.png">
+                </div>           
             </div>
-            <div id="headingImage">
-                <img src="./images/voters_hold.png">
-            </div>           
+            <div class="pointcontainer">
+                <div class="pointtext">
+                    <p><strong>Background</strong></p>
+                    <p>
+                        You probably know that because of our Electoral College system, the winner of a US Presidential election isn't always the candidate who receives the most votes. In fact, five times in US history, the candidate who won the Electoral College vote actually lost the popular vote (which is a straight count of how many people voted for each candidate). This has now happened twice in the last six elections: once in 2000 (Bush defeated Gore but lost the popular vote 48.4% to 47.9%) and once in 2016 (Trump defeated Clinton but lost the popular vote 48.2% to 46.1%).
+                    </p>
+                    <p>
+                        If you think this is a problem, blame the inner workings of the Electoral College.  That's because the number of EC votes that the Constitution allocates to each state is equal to the number of the state's Congressional representatives, House and Senate combined.  House representation, of course, is based on population.  But since every state, regardless of population, gets exactly two senators, states' total EC votes aren't proportional to their population.  This means that smaller states get EC votes that are out of whack with -- meaning greater than --  the number of EC votes the state would get if EC votes were distributed proportionally according to the states' actual populations. 
+                    </p>
+                    <p>
+                        The result is that voters in low population states have more potential impact than voters in high population states. Let's look at the two extremes. Wyoming has about 575 thousand people and gets three Electoral College votes. So in Wyoming, each Electoral College vote represents about 192 thousand Wyoming people. But California has about 40 million people and 55 Electoral College votes, meaning each Electoral College vote represents 727 thousand people. The bottom line is that a Wyoming voter's vote has about 4 times as much Electoral College impact as a vote from a California voter:
+                    </p>
+                    <p>
+                        <center>
+                            <img src="../images/wyomingVCalif.png" width="90%">
+                        </center>
+                    </p>
+                    <p>
+                        <p><strong>The Myth of the Red State Advantage</strong></p>
+
+                        It's easy to think that red states are rural and less populated, so that their voters must have a lot undue influence on electoral college results in presidential elections. But it's not that simple. Let's take a look.
+                    </p>
+                    <!-- <p>
+                        
+                    </p>
+                    <p>
+                        <center>
+                            <div id="ECVPM" width="100%" height="100%"></div>
+                        </center>
+
+                    </p>
+                    <p>
+                        
+                    </p> -->
+                </div>
+            </div>
+
+
+                    <section id="scrolly">
+                        <article>
+                            <div class="step" data-step="1">
+                                <p>
+                                    We'll use a measure that's been called "voting power".  This is the electoral votes per voter within a state, meaning the number of electoral votes at stake in a state divided by the number of the state's eligible voters. Here's all the states, ranked by the voting power of their voters <strong>[NEED TO WORK OUT POPULATION VS. ELIGIBLE VOTER NUMBERS</strong>:
+                                </p>
+                            </div>
+                            <div class="step" data-step="2">
+                                <p>
+                                    Now let's color the bars to show the winner of the 2020 election in each state.  As you can see, there's a pretty even divide between red and blue states at both the top and bottom of the chart.
+                                </p>
+                            </div>
+                            <div class="step" data-step="3">
+                                <p>
+                                    This version of the chart shows, for each state, how much a voter's voting power deviates from the average. So voters in states with positive bars have more voting power than voters from a hypothetical "average state", and voters in states with negative bars have less voting power than average.
+                                </p>
+
+                                <p>
+                                    What's notable is that the positive direction isn't dominated by red states, and the negative direction isn't dominated by blue states. Among states where voters get more than average voting power (bars to the right of zero), there is a near even split between red and blue states. The same is true among states where voters get less than average voting power (bars to the left of zero).
+                                </p>
+                            </div>
+                            <div class="step" data-step="4">
+                                <p>Finally, for an even better view of how evenly split the voting power of voters in red and blue states is, here is the chart ordered by deviation within each party. It shows an almost identical pattern of red and blue deviation.</p>
+                            </div>
+                        </article>
+            
+                        <figure>
+                            <center>
+                                <!-- <div id="ECVPM" width="100%" height="100%"></div> -->
+                                <div id="deviation" width="100%" height="100%"></div>
+                                <!-- <div id="toggleButton" height="40"></div> -->
+                            </center>
+                        </figure>
+                    </section>
+
+
+                    <p>
+                        
+                    </p>
+                    <p>
+                        You can see from the charts that red states don't have the electoral advantage that you might have thought they do.  To quantify it even more, looking at 2016 presidential election results, if you divide the total population of states that voted Republican by the total number of EC votes they represent, you see that each 1 million voters in those states is associated with 1.59 EV votes.  That same calculation for states that voted Democratic?   It's 1.57.  So red state voters do not have the huge electoral college advantage that many people think they do. [NEED TO DO THIS ANALYSIS FOR 2020].
+                    </p>
+                    <p>
+                        <strong>JOE: from here down is really mostly notes about what I was thinking about saying.  Needs to be cleaned up and fleshed out.</strong>
+                    </p>
+                    <p>
+                        So if R's don't really have a big EC advantage, how did they win 2016 while losing the popular vote?  It's because of "wasted votes" -- meaning votes that don't help with the EC -- in an election where the losing party wins big states by big margins.  This chart shows that in 2016 the losing party --  D's -- indeed won big states by big margins.  Every vote over 50% of the popular vote is a "wasted" vote that contributes to the popular vote margin but does nothing improve the EC tally:
+                
+                        <center>
+                            <img src="../images/2016MarginVPop.png" width="90%">
+                        </center>
+                    </p>
+                    <p>
+                        So in 2016, generally speaking there was a slight trend of bigger states delivering bigger margins for the Ds. Compare 2020, where the line showing the relationship between winner margin and state size goes in a slightly negative direction for the Ds.  This was driven by higher victory margins in 2020 in almost all the smaller states they won in 2016, along with small margins in the states they flipped from R to D:
+                
+                        <center>
+                            <img src="../images/2020MarginVPop.png" width="90%">
+                        </center>
+                    </p>
+                    <p>
+                        <strong>NOTE: Could be intereting to run this chart for 2000 (bush v. gore), to see if it also shows losing party getting big margins in big states.</strong>
+                    </p>
+
+                </div>
+            </div>
         </div>
-        <div class="pointcontainer">
-            <div class="pointtext">
-                <p><strong>Background</strong></p>
-                <p>
-                    You probably know that because of our Electoral College system, the winner of a US Presidential election isn't always the candidate who receives the most votes. In fact, five times in US history, the candidate who won the Electoral College vote actually lost the popular vote (which is a straight count of how many people voted for each candidate). This has now happened twice in the last six elections: once in 2000 (Bush defeated Gore but lost the popular vote 48.4% to 47.9%) and once in 2016 (Trump defeated Clinton but lost the popular vote 48.2% to 46.1%).
-                </p>
-                <p>
-                    If you think this is a problem, blame the inner workings of the Electoral College.  That's because the number of EC votes that the Constitution allocates to each state is equal to the number of the state's Congressional representatives, House and Senate combined.  House representation, of course, is based on population.  But since every state, regardless of population, gets exactly two senators, states' total EC votes aren't proportional to their population.  This means that smaller states get EC votes that are out of whack with -- meaning greater than --  the number of EC votes the state would get if EC votes were distributed proportionally according to the states' actual populations. 
-                </p>
-                <p>
-                    The result is that voters in low population states have more potential impact than voters in high population states. Let's look at the two extremes. Wyoming has about 575 thousand people and gets three Electoral College votes. So in Wyoming, each Electoral College vote represents about 192 thousand Wyoming people. But California has about 40 million people and 55 Electoral College votes, meaning each Electoral College vote represents 727 thousand people. The bottom line is that a Wyoming voter's vote has about 4 times as much Electoral College impact as a vote from a California voter:
-                </p>
-                <p>
-                    <center>
-                        <img src="./images/wyomingVCalif.png" width="90%">
-                    </center>
-                </p>
-                <p>
-                    <p><strong>The Myth of the Red State Advantage</strong></p>
-
-                    It's easy to think that red states are rural and less populated, so that their voters must have a lot undue influence on electoral college results in presidential elections. But it's not that simple. Let's take a look.
-                </p>
-                <p>
-                    We'll use a measure that's been called "voting power".  This is the electoral votes per voter within a state, meaning the number of electoral votes at stake in a state divided by the number of the state's eligible voters. Here's all the states, ranked by the voting power of their voters <strong>[NEED TO WORK OUT POPULATION VS. ELIGIBLE VOTER NUMBERS</strong>:
-                </p>
-                <p>
-                    <center>
-                        <div id="ECVPM" width="100%" height="100%"></div>
-                    </center>
-
-                </p>
-                <p>
-                    The chart below is probably a more useful way to compare voting power in each state. The chart shows, for each state, how much a voter's voting power deviates from the average. So voters in states with positive bars have more voting power than voters from a hypothetical "average state", and voters in states with negative bars have less voting power than average. The bars are colored according to the winner of the 2020 presidential election in each state.  
-                </p>
-                <p>
-                    <center>
-                        <div id="deviation"></div>
-                        <div id="toggleButton" height="40"></div>
-                    </center>
-                </p>
-                <p>
-                    <strong>[Toggle View button will be changed to a left-right toggle switch where options are "Deviation" and "Deviation by Party</strong>>
-                </p>
-                <p>
-                    Here's what's most notable about the chart above: the positive direction isn't dominated by red states, and the negative direction isn't dominated by blue states. Among states where voters get more than average voting power (bars to the right of zero), there is a near even split between red and blue states. The same is true among states where voters get less than average voting power (bars to the left of zero). 
-                </p>
-                <p>
-                    For an even better view of how evenly split the voting power of voters in red and blue states is, click the toggle to "Deviation by State and Party".  You'll see an almost identical pattern of red and blue deviation.
-                </p>
-                <P>
-                    In fact, looking at 2016 presidential election results, if you divide the total population of states that voted Republican by the total number of EC votes they represent, you see that each 1 million voters in those states is associated with 1.59 EV votes.  That same calculation for states that voted Democratic?   It's 1.57.  So red state voters do not have the huge electoral college advantage that many people think they do. [NEED TO DO THIS ANALYSIS FOR 2020].
-                </P>
-                <p>
-                    <strong>JOE: from here down is really mostly notes about what I was thinking about saying.  Needs to be cleaned up and fleshed out.</strong>
-                </p>
-                <p>
-                    So if R's don't really have a big EC advantage, how did they win 2016 while losing the popular vote?  It's because of "wasted votes" -- meaning votes that don't help with the EC -- in an election where the losing party wins big states by big margins.  This chart shows that in 2016 the losing party --  D's -- indeed won big states by big margins.  Every vote over 50% of the popular vote is a "wasted" vote that contributes to the popular vote margin but does nothing improve the EC tally:
-            
-                    <center>
-                        <img src="./images/2016MarginVPop.png" width="90%">
-                    </center>
-                </p>
-                <p>
-                    So in 2016, generally speaking there was a slight trend of bigger states delivering bigger margins for the Ds. Compare 2020, where the line showing the relationship between winner margin and state size goes in a slightly negative direction for the Ds.  This was driven by higher victory margins in 2020 in almost all the smaller states they won in 2016, along with small margins in the states they flipped from R to D:
-            
-                    <center>
-                        <img src="./images/2020MarginVPop.png" width="90%">
-                    </center>
-                </p>
-                <p>
-                    <strong>NOTE: Could be intereting to run this chart for 2000 (bush v. gore), to see if it also shows losing party getting big margins in big states.</strong>
-                </p>
-
-            </div>
-       </div>
-    </div>
+    </main>
     
-    
-
-    
-
-
 <!-- <p>This is my text. I make a claim that needs a citation.<input type="checkbox" id="cb1"/><label for="cb1"><sup>1</sup></label><span id="citation"><br><br> This is the citation.<br><br></span> Continued text.</p> -->
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- <script src="../master_d3/d3_min_lib/d3.min.js"></script> -->
+    <!-- <script src="./d3v4+jetpack.js"></script> -->
+    <!-- <script src="../d3-d3-0713d54/src/index.js"></script> -->
+    <!-- <script src="../d3-7.8.2/src/index.js"></script> -->
+    <!-- <script src="../../d3.min.js"></script> -->
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
     <script src="./electoralCollege_2.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <!-- <script src="../stickyfill.min.js"></script> -->
+    <script src="./scrollama.min.js"></script>
+
+    <!-- <script>
+		/* // using d3 for convenience
+		var main = d3.select("main");
+		var scrolly = main.select("#scrolly");
+		var figure = scrolly.select("figure");
+        console.log("figure is")
+        console.log(figure)
+		var article = scrolly.select("article");
+		var step = article.selectAll(".step");
+
+		// initialize the scrollama
+		var scroller = scrollama();
+
+		// generic window resize listener event
+		function handleResize() {
+            console.log("in handleResize")
+			// 1. update height of step elements
+			// var stepH = Math.floor(window.innerHeight * 0.75);
+            var stepH = Math.floor(window.innerHeight * 0.5);
+
+			step.style("height", stepH + "px");
+
+			// var figureHeight = window.innerHeight / 2;
+            var figureHeight = window.innerHeight;
+			// var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+            figureMarginTop = 10;
+
+			figure
+				.style("height", figureHeight + "px")
+				.style("top", figureMarginTop + "px");
+
+			// 3. tell scrollama to update new element dimensions
+			scroller.resize();
+		}
+
+		// scrollama event handlers
+		function handleStepEnter(response) {
+			console.log(response);
+			// response = { element, direction, index }
+
+			// add color to current step only
+            // This sets the class of the step to "is-active" if it is the current step
+			step.classed("is-active", function (d, i) {
+                console.log("got here")
+				return i === response.index;
+			});
+
+			// update text inside figure area based on step
+			// figure.select("p").text(response.index + 1);
+            if(response.index == 1){
+                drawDeviationChart(data2020, 1)
+            }
+		}
+
+		function init() {
+
+			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
+			handleResize();
+
+			// 2. setup the scroller passing options
+			// 		this will also initialize trigger observations
+			// 3. bind scrollama event handlers (this can be chained like below)
+			scroller
+				.setup({
+					step: "#scrolly article .step",
+					offset: 0.33,
+					debug: false
+				})
+				.onStepEnter(handleStepEnter);
+		}
+
+		// kick things off
+		init(); */
+	</script> -->
 </body>

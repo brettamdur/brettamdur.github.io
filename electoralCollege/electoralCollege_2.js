@@ -5,7 +5,6 @@ async function drawCharts() {
     ///////////////////////
 
     // load rData2016 data, converting numeric columns to numbers
-    let data2016 = await d3.csv("./data/rData2016.csv")
 
     data2016 = await d3.csv("./data/rData2016.csv", function(d){
         return {
@@ -55,134 +54,6 @@ async function drawCharts() {
             ECPerVoterDeviation: +d.ECV_deviation      
         } 
     })
-
-    function drawECVPMChart(){
-        
-        /////////////////////////////
-        /// 2. Chart Dimensions  ///
-        ///////////////////////////
-
-        // set the dimensions of the svg
-        svgWidth = 600
-        svgHeight = 700 
-
-        // set the dimensions of the chart area within the svg. This is where the chart will be drawn.
-        const gapMargin = {top: 10, right: 0, bottom: 30, left: 10}
-        const perfMargin = {top: 18, right: 0, bottom: 20, left: 100}
-        const perfAreaWidth = svgWidth - gapMargin.left - gapMargin.right
-        const perfAreaHeight = svgHeight - gapMargin.top - gapMargin.bottom
-        const dataAreaWidth = perfAreaWidth - perfMargin.left - perfMargin.right
-        const dataAreaHeight = perfAreaHeight - perfMargin.top - perfMargin.bottom
-
-        /////////////////////////////
-        /// 3. Draw Canvas       ///
-        ///////////////////////////
-
-        const ECVPM_svg = d3.select("#ECVPM")
-            .append("svg")
-            .attr("id", "ECVPM_svg")
-            .attr("width", svgWidth)
-            .attr("height", svgHeight)
-
-        const ECVPMPerfArea = ECVPM_svg.append("g")
-            .attr("id", "ECVPMPerfArea")
-            .style("transform", `translate(${gapMargin.left}px, ${gapMargin.top}px)`)
-            
-        const ECVPMDataArea = ECVPMPerfArea.append("g")
-            .attr("id", "ECVPMDataArea")
-            .style("transform", `translate(${perfMargin.left + gapMargin.left}px, ${perfMargin.top + gapMargin.top}px)`)
-
-          //////////////////////////////
-         /// 4. Create Scales      ////
-        //////////////////////////////
-
-        const xScale = d3.scaleLinear()
-            .domain(d3.extent(data2016, d => d.ECVPM_ApportionPop))
-            .range([0, dataAreaWidth])
-            .nice()
-
-          //////////////////////////////
-         /// 5. Draw Chart         ////
-        /////////////////////////////
-
-        // sort data2016 by ECVPM_ApportionPop
-        data2016.sort((a, b) => d3.descending(a.ECVPM_ApportionPop, b.ECVPM_ApportionPop))
-
-        // draw the rects for ECVPM_ApportionPop
-        const barPadding = 2
-        const barHeight = (dataAreaHeight / data2016.length) - barPadding
-        ECVPMDataArea.selectAll("rect")
-            .data(data2016)
-            .join("rect")
-            .attr("x", 0)
-            .attr("y", (d, i) => i * (barHeight + barPadding))
-            .attr("width", d => xScale(d.ECVPM_ApportionPop))
-            .attr("height", barHeight)
-            .attr("fill", "orange")
-            .attr("stroke", "black")
-            .attr("stroke-width", 0)
-
-        // draw the text labels for each bar
-        ECVPMDataArea.selectAll("text")
-            .data(data2016)
-            .join("text")
-            .attr("x", -20)
-            .attr("y", (d, i) => i * (barHeight + barPadding) + (barHeight / 2) + 4)
-            .text(d => d.Abbreviation)
-            .attr("font-size", 10)
-            .attr("fill", "black")
-            .attr("stroke", "none")
-            .attr("stroke-width", 0)
-            // set anchor to middle
-            .attr("text-anchor", "middle")
-
-          //////////////////////////////
-         /// 5. Draw Periferals    ////
-        //////////////////////////////
-
-        // draw the x-axis
-        const xAxis = d3.axisBottom(xScale)
-            .ticks(5)
-            .tickSize(-dataAreaHeight)
-            .tickFormat(d => d)
-        ECVPMPerfArea.append("g")
-            .attr("id", "xAxis")
-            .style("transform", `translate(${perfMargin.left + gapMargin.left}px, ${perfMargin.top + gapMargin.top + dataAreaHeight}px)`)
-            .call(xAxis)
-            .call(g => g.select(".domain").remove())
-            .call(g => g.selectAll(".tick line").attr("stroke", "lightgrey"))
-            .call(g => g.selectAll(".tick text").attr("font-size", 10))
-
-        // draw the title
-        ECVPMPerfArea.append("text")
-            .attr("id", "ECVPMTitle")
-            .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
-            .attr("y", gapMargin.top)
-            .attr("font-family", "Inter")
-            .attr("font-weight", 700)
-            // set anchor to middle
-            .attr("text-anchor", "middle")
-            .attr("font-size", 16)
-            .text("Electoral College Votes Per Million in Population")
-
-        // draw the x-axis label
-        ECVPMPerfArea.append("text")
-            .attr("id", "ECVPMLabel")
-            .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
-            .attr("y", svgHeight - gapMargin.bottom / 2)
-            .attr("font-family", "Inter")
-            .attr("font-weight", 400)
-            // set anchor to middle
-            .attr("text-anchor", "middle")
-            .attr("font-size", 14)
-            .text("Electoral College Votes")
-            
-          ///////////////////////////////
-         /// 6.  Add Interactivity  ////
-        ///////////////////////////////
-    }
-
-    /////// DEVIATION SVG ///////
     
     /////////////////////////////
     /// 2. Chart Dimensions  ///
@@ -220,15 +91,26 @@ async function drawCharts() {
 
   
 
-    // Note that this function call has to be after the creation of the svg. Otherwise the binding of the new data happens on new svg elements, not the existing ones.
+    // Note that to update an already redered chart with new data, this function can't include the svg creation code. Otherwise the binding of the new data would happen on new svg elements, not the existing ones.
     function drawDeviationChart(ECVData, view){
     
           //////////////////////////////
          /// 4. Create Scales      ////
         //////////////////////////////
 
-        const xScale = d3.scaleLinear()
+        /* const xScale = d3.scaleLinear()
             .domain(d3.extent(ECVData, d => d.ECVPM_Deviation))
+            .range([0, dataAreaWidth])
+            .nice() */
+        
+        const xScale = d3.scaleLinear()
+            .domain(d3.extent(ECVData, d => {
+                if(view <= 1){
+                    return d.ECVPM_ApportionPop
+                } else {
+                    return d.ECVPM_Deviation
+                }
+            }))
             .range([0, dataAreaWidth])
             .nice()
 
@@ -240,16 +122,32 @@ async function drawCharts() {
 
         // Add property to ECVData to store the index of each object if it was sorted by ECVPM_Deviation        
 
-        ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_Deviation, b.ECVPM_Deviation))
+        /* // sort data2016 by ECVPM_ApportionPop
+        ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_ApportionPop, b.ECVPM_ApportionPop))
+
+        if(view > 1){
+            ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_Deviation, b.ECVPM_Deviation))
+        }
         ECVData.forEach((d, i) => d.deviationIndex = i)
-        /* if(view == 0){
-            ECVData = ECVData.sort((a, b) => d3.descending(a.Winner, b.Winner))
-        } */
+        // if(view == 0){
+        //    ECVData = ECVData.sort((a, b) => d3.descending(a.Winner, b.Winner))
+        //} 
         // Add property to ECVData to store the index of each object if it was sorted by Winner
         ECVData.sort((a, b) => d3.descending(a.Winner, b.Winner))
-        ECVData.forEach((d, i) => d.winnerIndex = i)
+        ECVData.forEach((d, i) => d.winnerIndex = i) */
 
-        // draw the rects for ECVPM_Deviation
+
+        // create indices for the three ways to sort the data
+        ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_Deviation, b.ECVPM_Deviation))
+        ECVData.forEach((d, i) => d.deviationIndex = i)
+        ECVData.sort((a, b) => d3.descending(a.Winner, b.Winner))
+        ECVData.forEach((d, i) => d.winnerIndex = i)
+        ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_ApportionPop, b.ECVPM_ApportionPop))
+        ECVData.forEach((d, i) => d.apportionIndex = i)
+
+        
+            
+        // draw the rects for the data
         const barPadding = 2
         const barHeight = (dataAreaHeight / ECVData.length) - barPadding
         rects = deviationDataArea.selectAll("rect")
@@ -259,44 +157,61 @@ async function drawCharts() {
             .duration(2000)
             .attr("id", d => d.State)
             .attr("x", d =>{
-                let zeroValue = xScale(0)
-                if(d.ECVPM_Deviation > 0){
-                    return zeroValue
+                if(view >=2){ // for the deviation charts    
+                    let zeroValue = xScale(0)
+                    if(d.ECVPM_Deviation > 0){
+                        return zeroValue
+                    }
+                    else {
+                        return xScale(d.ECVPM_Deviation)
+                    }
                 }
-                else {
-                    return xScale(d.ECVPM_Deviation)
+                else { // for the apportionment charts
+                    // return xScale(d.ECVPM_ApportionPop)
+                    return 0;
+                }
+            })
+            .attr("y", (d, i) => {
+                if(view <= 1){
+                    return (d.apportionIndex) * (barHeight + barPadding)
+                }
+                else{
+                    if(view == 2){
+                        return (d.deviationIndex) * (barHeight + barPadding)
+                    }
+                    else {
+                        return (d.winnerIndex) * (barHeight + barPadding)
+                    }
                 }
             })
             .attr("width", d => {
-                return Math.abs(xScale(d.ECVPM_Deviation) - zeroValue)
+                if(view <= 1){ // for the apportionment charts
+                    return xScale(d.ECVPM_ApportionPop)
+                }
+                else { // for the deviation charts
+                    return Math.abs(xScale(d.ECVPM_Deviation) - zeroValue)
+                }
             })
             .attr("height", barHeight)
             // set fill to blue if Winner = Biden, red if Winner = Trump
             .attr("fill", d => {
-                if(d.DPct > d.RPct){
-                    // return "#3989CB"  // NYT blue
-                    return '#a4a4d6' // Tableau blue
-                    // return "#2d98ef"
-                }
-                else {
-                    return "#d75c5c" // NYT red
-                    // return '#ec1d2c' // Tableau red
+                if(view == 0){
+                    return ("orange")
+                } else{
+                    if(d.DPct > d.RPct){
+                        // return "#3989CB"  // NYT blue
+                        return '#a4a4d6' // Tableau blue
+                        // return "#2d98ef"
+                    }
+                    else {
+                        return "#d75c5c" // NYT red
+                        // return '#ec1d2c' // Tableau red
+                    }
                 }
             })
             .attr("stroke", "black")
             .attr("stroke-width", 0)
-            /* .transition()
-            .duration(1000) 
-            .delay((d, i) => i * 100)
-            .ease(d3.easeLinear) */
-            .attr("y", (d, i) => {
-                if(view == 0){
-                    return (d.deviationIndex) * (barHeight + barPadding)
-                }
-                else {
-                    return (d.winnerIndex) * (barHeight + barPadding)
-                }
-            })
+            
 
           //////////////////////////////
          /// 6. Draw Peripherals    ////
@@ -317,28 +232,65 @@ async function drawCharts() {
             .attr("stroke-width", 0)
             // set anchor to middle
             .attr("text-anchor", "middle")
-            .attr("y", (d, i) => {
-                if(view == 0){
-                    return (d.deviationIndex + 1) * (barHeight + barPadding)
+            .attr("y", (d, i) => { 
+                if(view <= 1){
+                    return (d.apportionIndex    ) * (barHeight + barPadding) + 8
                 }
-                else {
-                    return (d.winnerIndex + 1) * (barHeight + barPadding)
+                else{
+                    if(view == 2){
+                        return (d.deviationIndex) * (barHeight + barPadding) + 8
+                    }
+                    else {
+                        return (d.winnerIndex) * (barHeight + barPadding) + 8
+                    }
                 }
             })
 
 
         // draw the x-axis
-        const xAxis = d3.axisBottom(xScale)
-            //.ticks(5)
+        // create the x-axis 
+        /* const xAxis = d3.axisBottom(xScale)
             .tickSize(-dataAreaHeight)
             .tickFormat(d => d)
-        deviationPerfArea.append("g")
-            .attr("id", "xAxis")
+
+        // append the x-axis to the svg
+        var xAxisGroup =   deviationPerfArea.append("g")
+            .attr("id", "xAxisGroup")
             .style("transform", `translate(${perfMargin.left + gapMargin.left}px, ${perfMargin.top + gapMargin.top + dataAreaHeight}px)`)
-            .call(xAxis)
-            .call(g => g.select(".domain").remove())
-            .call(g => g.selectAll(".tick line").attr("stroke", "lightgrey"))
-            .call(g => g.selectAll(".tick text").attr("font-size", 10))
+            .call(xAxis) */
+        
+        if(!d3.select("#xAxisGroup").empty()){
+            d3.select("#xAxisGroup")
+            .transition()
+            .duration(500)
+            .style('opacity', 0)
+            .remove()
+            .call(updateXAxis)
+        }
+        else {
+            updateXAxis()
+        }
+
+        function updateXAxis(){
+
+           // create the x-axis object
+            var xAxis = d3.axisBottom(xScale)
+                .tickSize(-dataAreaHeight)
+                .tickFormat(d => d)
+            
+            // append the x-axis object to the svg
+            var xAxisGroup =   deviationPerfArea.append("g")
+                .attr("id", "xAxisGroup")
+                .style("transform", `translate(${perfMargin.left + gapMargin.left}px, ${perfMargin.top + gapMargin.top + dataAreaHeight}px)`)
+                .transition()
+                .duration(2000)
+                .call(xAxis)
+                .style('opacity', 1)
+        }
+
+        // updateXAxis()
+        
+        d3.selectAll(".tick line").style("stroke", "lightgray")
 
         // draw the title
         deviationPerfArea.append("text")
@@ -351,17 +303,47 @@ async function drawCharts() {
             .attr("text-anchor", "middle")
             .attr("font-size", 16)
             .text("Electoral College Votes Per Million in Population:")
-        deviationPerfArea.append("text")
-            .attr("id", "ECVPMTitle")
-            .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
-            .attr("y", gapMargin.top + 22)
-            .attr("font-family", "Inter")
-            .attr("font-weight", 700)
-            // set anchor to middle
-            .attr("text-anchor", "middle")
-            .attr("font-size", 16)
-            .text("Deviation from Mean")
-
+        
+        // draw the subtitle, if necessary
+        // view >=2 ? subTitle = 'Deviation from Average' : subTitle = ' '
+        if(view >= 2){
+            deviationPerfArea.append("text")
+                .attr("id", "ECVPMsubTitle")
+                .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
+                .attr("y", gapMargin.top + 22)
+                .attr("font-family", "Inter")
+                .attr("font-weight", 700)
+                .attr("text-anchor", "middle")
+                .attr("font-size", 16)
+                .attr("opacity", 0)
+                .text('Deviation from Average')
+                .transition()
+                .duration(2000)
+                .attr("opacity", 1)
+        } 
+        else{
+            console.log('view is' + view)
+            console.log('ready to remove')
+            if(!d3.select("#ECVPMsubTitle").empty()){
+                console.log('not empty')
+            }
+            else{
+                console.log('empty')
+            }
+            d3.select("#ECVPMsubTitle")
+                /* .transition()
+                .duration(2000)            */
+                .remove()
+            console.log('after remove')
+            if(!d3.select("#ECVPMsubTitle").empty()){
+                console.log('not empty')
+            }
+            else{
+                console.log('empty')
+            }
+            
+        }
+            
         // draw the x-axis label
         deviationPerfArea.append("text")
             .attr("id", "ECVPMLabel")
@@ -379,7 +361,7 @@ async function drawCharts() {
         ///////////////////////////////
 
     }
-    drawECVPMChart()
+    // drawECVPMChart()
     drawDeviationChart(data2020, 0)
 
     const button = d3.select("#toggleButton")
@@ -391,14 +373,97 @@ async function drawCharts() {
     /* .style("top", "50%")
     .style("transform", "translate(-50%, -50%)") */
 
-
-
-    button.node().addEventListener("click", onClick)
+    /* button.node().addEventListener("click", onClick)
     counter = 1
     function onClick() {
         selectedView = counter % 2
         drawDeviationChart(data2020, selectedView)
         counter += 1
+    } */
+
+    /////////////// SCROLLAMA STUFF ///////////////
+
+    // using d3 for convenience
+    var main = d3.select("main");
+    var scrolly = main.select("#scrolly");
+    var figure = scrolly.select("figure");
+    var article = scrolly.select("article");
+    var step = article.selectAll(".step");
+
+    // initialize the scrollama
+    var scroller = scrollama();
+
+    // generic window resize listener event
+    function handleResize() {
+        // 1. update height of step elements
+        // var stepH = Math.floor(window.innerHeight * 0.75);
+        var stepH = Math.floor(window.innerHeight * 1);
+
+        step.style("height", stepH + "px");
+
+        // var figureHeight = window.innerHeight / 2;
+        var figureHeight = window.innerHeight;
+        // var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+        figureMarginTop = 10;
+
+        figure
+            .style("height", figureHeight + "px")
+            .style("top", figureMarginTop + "px");
+
+        // 3. tell scrollama to update new element dimensions
+        scroller.resize();
     }
+
+    // scrollama event handlers
+    function handleStepEnter(response) {
+        // response = { element, direction, index }
+
+        // add color to current step only
+        // This sets the class of the step to "is-active" if it is the current step
+        step.classed("is-active", function (d, i) {
+            return i === response.index;
+        });
+
+        // update text inside figure area based on step
+        // figure.select("p").text(response.index + 1);
+        if(response.index == 0){
+            drawDeviationChart(data2020, 0)
+        } 
+        else{
+            if(response.index == 1){
+                drawDeviationChart(data2020, 1)
+            }
+            else{
+                if(response.index == 2){
+                    drawDeviationChart(data2020, 2)
+                }
+                else{
+                    if(response.index == 3){
+                        drawDeviationChart(data2020, 3)
+                    }
+                }
+            }
+        }
+    }
+
+    function init() {
+
+        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+        handleResize();
+
+        // 2. setup the scroller passing options
+        // 		this will also initialize trigger observations
+        // 3. bind scrollama event handlers (this can be chained like below)
+        scroller
+            .setup({
+                step: "#scrolly article .step",
+                offset: 0.33,
+                debug: false
+            })
+            .onStepEnter(handleStepEnter);
+    }
+
+    // kick things off
+    init();    
 }
 drawCharts()
