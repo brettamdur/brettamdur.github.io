@@ -208,13 +208,6 @@ ggplot(data = data2020, aes(
     ggtitle("2020: Winner Margin vs. Population") +
     theme(plot.title = element_text(size = 10, family = "Inter", hjust = 0.5, face = "bold"))
 
-
-
-
-
-
-
-
 data2016 %>% group_by(`Winner`) %>% 
     summarise(count = n(), Pop = sum(ApportionPop), EV = sum(TotalEV), pct = EV / Pop * 1000000)
 
@@ -232,3 +225,32 @@ differences <-
 View(differences %>% filter(PopDiff != 0 | ECVotesDiff != 0))
 
     
+
+
+###### 2000 ######
+
+# get current working directory
+setwd('../electoralCollege')
+data2000 <- read.csv('./data/2000.csv', header = TRUE)
+
+ggplot(data = data2000, aes(
+        x = Population,
+        y = abs(RWinnerMargin), color = Winner)
+      ) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    scale_x_continuous(labels = scales::comma) +
+    geom_text(aes(label = Abbreviate), vjust = -0.5, hjust = 0.7, size = 2) +
+    scale_color_manual(values = c("#2d98ef", "#d75c5c"), labels = c("D", "R")) +
+    xlab("Population") + ylab("Winner Margin (% Points)") +
+    # set x-axis to go from 0 to 40 million in increments of 10 million, and us comma to separate thousands
+    scale_x_continuous(breaks = seq(0, 40000000, 10000000), labels = scales::comma, limits = c(0, 40000000)) +
+    theme(axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8), axis.title.x = element_text(size = 8), axis.title.y = element_text(size = 8), text = element_text(family = "Inter"), legend.title = element_blank(), legend.key = element_rect(fill = NA), panel.background = element_blank()) +
+    ggtitle("2000: Winner Margin vs. Population") +
+    theme(plot.title = element_text(size = 10, family = "Inter", hjust = 0.5, face = "bold"))
+    
+
+
+
+
+ 

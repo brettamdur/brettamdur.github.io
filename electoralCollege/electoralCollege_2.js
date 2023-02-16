@@ -322,25 +322,14 @@ async function drawCharts() {
                 .attr("opacity", 1)
         } 
         else{
-            console.log('view is' + view)
-            console.log('ready to remove')
             if(!d3.select("#ECVPMsubTitle").empty()){
-                console.log('not empty')
             }
             else{
-                console.log('empty')
             }
             d3.select("#ECVPMsubTitle")
                 /* .transition()
                 .duration(2000)            */
                 .remove()
-            console.log('after remove')
-            if(!d3.select("#ECVPMsubTitle").empty()){
-                console.log('not empty')
-            }
-            else{
-                console.log('empty')
-            }
             
         }
             
@@ -355,6 +344,25 @@ async function drawCharts() {
             .attr("text-anchor", "middle")
             .attr("font-size", 14)
             .text("Electoral College Votes")
+
+        // transition the active .step.is-active text to darker weight
+
+        d3.selectAll('div.step.is-active')
+            /* .style("font-weight", 100) */
+            /* .transition()
+            .duration(4000) */
+            .style('font-weight', 400)
+            // .style("width", "100%")
+            /* .style("opacity", 1) // add this line to ensure opacity is set to 1 after the transition
+            .style("opacity", "1 !important"); // add this line to make the opacity style take precedence */
+
+        d3.selectAll(".step")
+            .filter(function() {
+                return !d3.select(this).classed("is-active");
+            })
+            .style("font-weight", 100);
+        
+
             
           ///////////////////////////////
          /// 7.  Add Interactivity  ////
@@ -446,6 +454,16 @@ async function drawCharts() {
         }
     }
 
+    function handleStepExit(response) {
+       /*  // response = { element, direction, index }
+        d3.selectAll(".step")
+            .filter(function() {
+                return !d3.select(this).classed("is-active");
+            })
+            .selectAll("p")
+            .style("font-weight", 100); */
+    }
+
     function init() {
 
         // 1. force a resize on load to ensure proper dimensions are sent to scrollama
@@ -457,10 +475,11 @@ async function drawCharts() {
         scroller
             .setup({
                 step: "#scrolly article .step",
-                offset: 0.33,
+                offset: 0.5,
                 debug: false
             })
-            .onStepEnter(handleStepEnter);
+            .onStepEnter(handleStepEnter)
+            .onStepExit(handleStepExit);
     }
 
     // kick things off
