@@ -472,10 +472,13 @@ async function drawCharts() {
         // 2. setup the scroller passing options
         // 		this will also initialize trigger observations
         // 3. bind scrollama event handlers (this can be chained like below)
+
+        var midpoint = Math.floor(window.innerHeight * 0.5) + "px"
+
         scroller
             .setup({
                 step: "#scrolly article .step",
-                offset: 0.5,
+                offset: 0.7,
                 debug: false
             })
             .onStepEnter(handleStepEnter)

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "D3",
+			"path": "../../../Box/dataj/D3"
+		},
+		{
+			"name": "brettamdur.github.io",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"r.bracketedPaste": true,
+		"liveServer.settings.multiRootWorkspaceName": "brettamdur.github.io"
+	}
+}
