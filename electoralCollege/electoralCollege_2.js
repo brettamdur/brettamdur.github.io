@@ -72,7 +72,7 @@ async function drawCharts() {
     dataAreaHeight = perfAreaHeight - perfMargin.top - perfMargin.bottom
 
     /////////////////////////////
-    /// 3. Draw Canvas       ///
+    /// 3. Create Canvas     ///
     ///////////////////////////
 
     const deviation_svg = d3.select("#deviation")
@@ -120,23 +120,6 @@ async function drawCharts() {
          /// 5. Draw Chart         ////
         //////////////////////////////
 
-        // Add property to ECVData to store the index of each object if it was sorted by ECVPM_Deviation        
-
-        /* // sort data2016 by ECVPM_ApportionPop
-        ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_ApportionPop, b.ECVPM_ApportionPop))
-
-        if(view > 1){
-            ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_Deviation, b.ECVPM_Deviation))
-        }
-        ECVData.forEach((d, i) => d.deviationIndex = i)
-        // if(view == 0){
-        //    ECVData = ECVData.sort((a, b) => d3.descending(a.Winner, b.Winner))
-        //} 
-        // Add property to ECVData to store the index of each object if it was sorted by Winner
-        ECVData.sort((a, b) => d3.descending(a.Winner, b.Winner))
-        ECVData.forEach((d, i) => d.winnerIndex = i) */
-
-
         // create indices for the three ways to sort the data
         ECVData = ECVData.sort((a, b) => d3.descending(a.ECVPM_Deviation, b.ECVPM_Deviation))
         ECVData.forEach((d, i) => d.deviationIndex = i)
@@ -146,7 +129,6 @@ async function drawCharts() {
         ECVData.forEach((d, i) => d.apportionIndex = i)
 
         
-            
         // draw the rects for the data
         const barPadding = 2
         const barHeight = (dataAreaHeight / ECVData.length) - barPadding
@@ -277,6 +259,7 @@ async function drawCharts() {
             var xAxis = d3.axisBottom(xScale)
                 .tickSize(-dataAreaHeight)
                 .tickFormat(d => d)
+                .tickSizeOuter(0)
             
             // append the x-axis object to the svg
             var xAxisGroup =   deviationPerfArea.append("g")
@@ -286,11 +269,11 @@ async function drawCharts() {
                 .duration(2000)
                 .call(xAxis)
                 .style('opacity', 1)
+                
         }
-
-        // updateXAxis()
         
         d3.selectAll(".tick line").style("stroke", "lightgray")
+        // d3.select(".tick line").style("stroke", "blue")
 
         // draw the title
         deviationPerfArea.append("text")
@@ -405,7 +388,8 @@ async function drawCharts() {
     function handleResize() {
         // 1. update height of step elements
         // var stepH = Math.floor(window.innerHeight * 0.75);
-        var stepH = Math.floor(window.innerHeight * 1);
+        // var stepH = Math.floor(window.innerHeight * 1);
+        var stepH = window.innerHeight        
 
         step.style("height", stepH + "px");
 
