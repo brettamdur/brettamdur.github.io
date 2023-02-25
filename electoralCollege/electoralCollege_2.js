@@ -227,19 +227,6 @@ async function drawCharts() {
                     }
                 }
             })
-
-
-        // draw the x-axis
-        // create the x-axis 
-        /* const xAxis = d3.axisBottom(xScale)
-            .tickSize(-dataAreaHeight)
-            .tickFormat(d => d)
-
-        // append the x-axis to the svg
-        var xAxisGroup =   deviationPerfArea.append("g")
-            .attr("id", "xAxisGroup")
-            .style("transform", `translate(${perfMargin.left + gapMargin.left}px, ${perfMargin.top + gapMargin.top + dataAreaHeight}px)`)
-            .call(xAxis) */
         
         if(!d3.select("#xAxisGroup").empty()){
             d3.select("#xAxisGroup")
@@ -276,20 +263,21 @@ async function drawCharts() {
         // d3.select(".tick line").style("stroke", "blue")
 
         // draw the title
-        deviationPerfArea.append("text")
-            .attr("id", "ECVPMTitle")
-            .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
-            .attr("y", gapMargin.top)
-            .attr("font-family", "Inter")
-            .attr("font-weight", 700)
-            // set anchor to middle
-            .attr("text-anchor", "middle")
-            .attr("font-size", 16)
-            .text("Electoral College Votes Per Million in Population:")
+        if(view == 0){
+            deviationPerfArea.append("text")
+                .attr("id", "ECVPMTitle")
+                .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
+                .attr("y", gapMargin.top)
+                .attr("font-family", "Inter")
+                .attr("font-weight", 700)
+                // set anchor to middle
+                .attr("text-anchor", "middle")
+                .attr("font-size", 16)
+                .text("Electoral College Votes Per Million in Population:")
+        }
         
         // draw the subtitle, if necessary
-        // view >=2 ? subTitle = 'Deviation from Average' : subTitle = ' '
-        if(view >= 2){
+        if(view ==2){  // if we're working on view 2 or 3, draw the subtitle
             deviationPerfArea.append("text")
                 .attr("id", "ECVPMsubTitle")
                 .attr("x", perfMargin.left + gapMargin.left + (dataAreaWidth / 2))
@@ -304,18 +292,28 @@ async function drawCharts() {
                 .duration(2000)
                 .attr("opacity", 1)
         } 
-        else{
-            if(!d3.select("#ECVPMsubTitle").empty()){
+        if(view == 1){
+            console.log(view)
+            d3.selectAll("#ECVPMsubTitle")
+                .transition()
+                .duration(2000)
+                .attr("opacity", 0)
+                .remove()
+            console.log("got here")
+        }
+        
+        /* else{  // if we're working on view 0 or 1, remove the subtitle if it's already been drawn
+            if(d3.select("#ECVPMsubTitle").empty()){
+                console.log(view + ' empty')
             }
             else{
-            }
-            d3.select("#ECVPMsubTitle")
-                /* .transition()
-                .duration(2000)            */
+                d3.select("#ECVPMsubTitle")
                 .remove()
-            
-        }
-            
+                console.log(view + ' removed')
+                
+            }
+        } */
+
         // draw the x-axis label
         deviationPerfArea.append("text")
             .attr("id", "ECVPMLabel")
@@ -439,13 +437,14 @@ async function drawCharts() {
     }
 
     function handleStepExit(response) {
-       /*  // response = { element, direction, index }
-        d3.selectAll(".step")
-            .filter(function() {
-                return !d3.select(this).classed("is-active");
-            })
-            .selectAll("p")
-            .style("font-weight", 100); */
+        // response = { element, direction, index }
+        step.classed("is-active", function (d, i) {
+            return i === response.index;
+        });
+
+        d3.select("#ECVPMsubTitle").remove()
+
+        // figure.select("p").text("");
     }
 
     function init() {
@@ -466,7 +465,7 @@ async function drawCharts() {
                 debug: false
             })
             .onStepEnter(handleStepEnter)
-            .onStepExit(handleStepExit);
+            /* .onStepExit(handleStepExit); */
     }
 
     // kick things off
