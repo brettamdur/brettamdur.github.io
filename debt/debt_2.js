@@ -135,8 +135,8 @@ async function drawCharts() {
                 })
                 .attr("y", yScale(0))
                 .attr("opacity", 0)
-                .transition()
-                .duration(2000)
+                /* .transition()
+                .duration(2000) */
                 .attr("x", d =>{
                     return xScale(d.Year) + barPadding
                 })
@@ -148,7 +148,6 @@ async function drawCharts() {
                     return barWidth
                 })
                 .attr("height", d => {
-                    //return (dataAreaHeight - yScale(d.PreviousR))
                     return (dataAreaHeight - yScale(d[rProperty]))
                 })
                 .attr("fill" , d => {
@@ -179,8 +178,8 @@ async function drawCharts() {
                     return xScale(d.Year) + barPadding
                 })
                 .attr("y", yScale(0))
-                .transition()
-                .duration(2000)
+                /* .transition()
+                .duration(2000) */
                 .attr("id", d => d.Year + "previousD")
                 .attr("x", d =>{
                     return xScale(d.Year) + barPadding
@@ -223,8 +222,8 @@ async function drawCharts() {
                     return xScale(d.Year) + barPadding
                 })
                 .attr("y", yScale(0))
-                .transition()
-                .duration(2000)
+                /* .transition()
+                .duration(2000) */
                 .attr("id", d => "newDebt" + d.Year)
                 .attr("x", d =>{
                     return xScale(d.Year) + barPadding
@@ -325,14 +324,54 @@ async function drawCharts() {
                     })
             } else { // if it's view #7
 
-                /* d3.selectAll('rect:not([id="2022"])').attr("opacity", 0)
-                // d3.selectAll('rect:not([id="2022"])').remove()
+                rProperty = "PreviousR"
+                dProperty = "PreviousD"
+                newProperty = "NewDebt"
 
-                lastRects = d3.selectAll("#2022")
-                    // .select("#2022")
+                d3.selectAll('rect:not([id="2022previousD"]):not([id="2022previousR"])')
                     .transition()
-                    .duration(2000)
-                    .attr("x", xScale(1990)) */
+                    .duration(1000)
+                    .attr("opacity", 0)
+                    .on("end", function() {
+
+                        lastRecs = d3.selectAll('rect')
+                            .filter(function() {
+                                return d3.select(this).attr('opacity') == 1;
+                            })
+
+                        lastRecs
+                        .transition()
+                        .duration(2000)
+                        .attr("x", function(d) {
+                            let currentRect = this  // this line is necessasry because otherwise, "this" refers to how it was used above in the definition of lastRecs.
+                            if (d3.select(currentRect).attr("id") == "2022previousD"){
+                                // console.log("got here")
+                                return (100)
+                            } else {
+                                return (300)
+                            }
+                        })                            
+                        // .attr("y", yScale(0))
+                        .attr("y", function(d) {
+                            let currentRect = this  // this line is necessasry because otherwise, "this" refers to how it was used above in the definition of lastRecs.
+                            if (d3.select(currentRect).attr("id") == "2022previousD"){
+                                return (yScale(d[dProperty]))
+                            } else {
+                                return (yScale(d[rProperty]))
+                            }
+                        })
+                        .attr("width", "150px")
+                        .attr("height", function(d) {
+                            let currentRect = this  // this line is necessasry because otherwise, "this" refers to how it was used above in the definition of lastRecs.
+                            if (d3.select(currentRect).attr("id") == "2022previousD"){
+                                return (dataAreaHeight - yScale(d[dProperty]))
+                            } else {
+                                return (dataAreaHeight - yScale(d[rProperty]))
+                            }
+                        })
+                    })
+                d3.selectAll("#xAxisGroup").transition().duration(2000).attr("opacity", 0)
+                d3.selectAll("#presidentName").transition().duration(2000).attr("opacity", 0)
             }
         }
 
@@ -343,16 +382,13 @@ async function drawCharts() {
         /// X Axis ///
            // create the x-axis object
             var xAxis = d3.axisBottom(xScale)
-                // .tickSize(-dataAreaHeight)
                 .tickFormat(d => d)
-                // .tickSizeOuter(0)
                 // keep the labels, but remove the lines and ticks
                 .tickSize(0)
                 .tickPadding(0)
                 .ticks(10)
                 // use all the years as tick values
                 .tickValues(debtData.map(d => d.Year))
-                // remove the horizontaal x-axis line
             
             // append the x-axis object to the svg
             if(view == 0){
@@ -434,70 +470,6 @@ async function drawCharts() {
         }
 
         /////////// ANNOTATIONS ///////////
-
-        /* switch(true){
-            case (d.Year >= 1970 && d.Year <= 1980):
-                d.barView = 1    
-                break
-            case (d.Year >= 1981 && d.Year <= 1992):
-                d.barView = 2
-                break
-            case (d.Year >= 1993 && d.Year <= 2000):
-                d.barView = 3
-                break
-            case (d.Year >= 2001 && d.Year <= 2007):
-                d.barView = 4
-                break
-            case (d.Year >= 2008):
-                d.barView = 5
-                break
-        } */
-
-        /* switch(view){
-            case (view == 5):
-                annotationPoint = d3.select("#newDebt2020")
-
-                annotations = [
-                    {
-                    note: {
-                        label: "Pandemic Spending",
-                        title: ""
-                    },
-                    type: d3.annotationCalloutRect,
-                        subject: {
-                        width: annotationPoint.attr("width"),
-                        height: annotationPoint.attr("height")
-                        },
-                    x: annotationPoint.attr("x"),
-                    y: annotationPoint.attr("y"),
-                    dx: annotationPoint.attr("x") - 600,
-                    dy: annotationPoint.attr("y") - 12
-                    }
-                ]
-                break;
-            
-            case (view == 1):
-                annotationPoint = d3.select("#newDebt1979")
-
-                annotations = [
-                    {
-                    note: {
-                        label: "Spending Cuts to Reduce Inflation",
-                        title: ""
-                    },
-                    type: d3.annotationCalloutRect,
-                        subject: {
-                        width: annotationPoint.attr("width"),
-                        height: annotationPoint.attr("height")
-                        },
-                    x: annotationPoint.attr("x"),
-                    y: annotationPoint.attr("y"),
-                    dx: annotationPoint.attr("x") - 600,
-                    dy: annotationPoint.attr("y") - 12
-                    }
-                ]
-             
-        } */
 
         let annotations = []
         console.log("running remove")
