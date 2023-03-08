@@ -11,12 +11,15 @@ async function drawCharts() {
             President: d.President,
             Party: d.Party,
             NewDebt: +d.NewDebtScaled,
-            PreviousR: +d.PreviousRScaled,
-            PreviousD: +d.PreviousDScaled,
+            PreviousR: +d.PreviousRScaledFinal,
+            PreviousD: +d.PreviousDScaledFinal,
             NewDebtPct: +d.NewDebtPct,
             TotalDebtInflationAdj: +d.TotalDebtInflationAdj
         }
     })
+
+    // log to the console the value of debtData PreviousD when the year was 2022
+    // console.log(debtData.filter(d => d.Year == 2022)[0].PreviousD)
 
     // convert d.Year to a number
     /* debtData.forEach(d => {
@@ -48,6 +51,8 @@ async function drawCharts() {
                 break
         }
     })
+
+    console.log(debtData)
 
     /////////////////////////////
     /// 2. Chart Dimensions  ///

@@ -115,6 +115,20 @@
     border-color: gray;
 } 
 
+#perYearContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    align-items: t;
+}
+
+#perYearText{
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 65px;
+    width: 20%   
+}
+
 #scrolly {
     position: relative;
     display: -webkit-box;
