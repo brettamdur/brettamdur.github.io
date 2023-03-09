@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Debt By Party</title>
+    <!-- <base href="/senateElections/"> -->
+    <link rel="stylesheet" href="./debt.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <!-- <style>
+    </style> -->
+</head>
+<body>
+    <main>
+        <div id="container">
+            <div id="heading">
+                <div id="articletitle">
+                    <div id="articletitle_main">
+                        <p> 
+                            Beyond The Fingerpointing:<br> A Look at the Parties' Responsibility for the National Debt
+                        </p>
+                    </div>
+                
+                </div>
+                <div id="headingimage">
+                    <img src="./fingerPointing.png" width="100%">
+                </div>           
+            </div>
+            <p id="subtitle">
+                The methodology behind the calculations in <a href="./debt.html">our story on the national debt</a>.
+            </p>
+            <div id="datebyline">
+                <strong>DRAFT / WORK IN PROGRESS: NOT FOR DISTRIBUTION</strong>
+            </div> 
+            <div class="pointcontainer">
+                <div class="pointtext">
+                    <p>
+                        Comparing the dollar values of the national debt across 50+ years required some adjustments.  First, and most obviously, we adjusted each year's debt for inflation, to put all the values in terms of 2022 dollars. The problem with stopping there, though, is that the national debt is commonly reported on an unadjusted basis.  As an example, if the debt was $10 in Year 1, and we borrowed an additional $1 for each of the next 50 years, the debt would be reported as $60 in Year 51.  Adjusting each year for inflation and then adding the years together would show the debt as being much greater than people are used to seeing it reported.  So instead, we adjusted the debt for inflation, and then scaled each year's inflation adjusted debt to being in the range of zero and $31T (the current debt as it's commonly reported).  This effectively shows the debt each year as an inflation adjusted percentage of the total current debt.
+                    </p>
+                    <p>
+                        One other minor point.  We allocated one half of the national debt that existed before 1970 to each of the two parties.  This isn't quite accurate, of course, but the pre-1970 debt is so small compared to more recent values that it has only a miniscule impact on the results.
+                    </p>
+
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    
+<!-- <p>This is my text. I make a claim that needs a citation.<input type="checkbox" id="cb1"/><label for="cb1"><sup>1</sup></label><span id="citation"><br><br> This is the citation.<br><br></span> Continued text.</p> -->
+
+    <!-- <script src="../master_d3/d3_min_lib/d3.min.js"></script> -->
+    <!-- <script src="./d3v4+jetpack.js"></script> -->
+    <!-- <script src="../d3-d3-0713d54/src/index.js"></script> -->
+    <!-- <script src="../d3-7.8.2/src/index.js"></script> -->
+    <!-- <script src="../../d3.min.js"></script> -->
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+    <script src="./debt_2.js"></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <!-- <script src="../stickyfill.min.js"></script> -->
+    <script src="./scrollama.min.js"></script>
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+    
+</body>
