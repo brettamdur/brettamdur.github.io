@@ -133,6 +133,16 @@ async function drawCharts() {
         if (view == 0 && direction != "up"){  // if this is the first view
             /* const barPadding = 2
             const barWidth = (dataAreaWidth / debtData.length) - barPadding */
+
+            // add the legend
+            deviationDataArea.append("image")
+                .attr("id", "legend")
+                .attr('xlink:href', './legend.png')
+                .attr("x", 20)
+                .attr("width", 258)
+                .attr("height", 15)
+                .attr("opacity", 0)
+
             rRects = deviationDataArea.append("g")
                 // .attr("class", `barGroup-`)
                 // .attr("id", `rRectArea-${view}`)
@@ -268,6 +278,11 @@ async function drawCharts() {
         } 
         else {  // if it's not the first view
             if (view != 7) { // and it's not view #7
+                
+                d3.select("#legend")
+                    .transition(t)
+                    .attr("opacity", 1)
+
                 d3.selectAll(".barPartyR")
                     .transition(t2)
                     .attr("fill", (d, i) => {
@@ -516,6 +531,7 @@ async function drawCharts() {
                 })
                 .attr("font-weight", "300")
         }
+
 
         /////////// ANNOTATIONS ///////////
 
