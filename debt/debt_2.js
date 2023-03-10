@@ -474,7 +474,7 @@ async function drawCharts() {
                     .attr("stroke-width", 0)
             }
 
-            d3.select("#xAxisGroup").selectAll("path").remove()
+            d3.selectAll("#xAxisGroup").selectAll("path").remove()
 
         /// Y Axis ///
         // create the y-axis object
@@ -738,6 +738,8 @@ async function drawCharts() {
         /////////////////////////////// 
 
     }
+
+    // drawDeviationChart(debtData, 0, "none")
 
     /////////////// SCROLLAMA STUFF ///////////////
 
