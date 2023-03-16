@@ -5,8 +5,9 @@ async function drawCharts() {
     ///////////////////////
 
     debtData = await d3.csv("data/debt_forD3Import.csv", function(d){
+        console.log("in function")
+        console.log(d)
         return {
-            // keep the Year column as a string
             Year: d.Year,
             President: d.President,
             Party: d.Party,
@@ -17,6 +18,9 @@ async function drawCharts() {
             TotalDebtInflationAdj: +d.TotalDebtInflationAdj
         }
     })
+
+    console.log("out of function")
+    console.log(debtData)
 
     // log to the console the value of debtData PreviousD when the year was 2022
     // console.log(debtData.filter(d => d.Year == 2022)[0].PreviousD)
@@ -52,7 +56,7 @@ async function drawCharts() {
         }
     })
 
-    console.log(debtData)
+    /* console.log(debtData) */
 
     /////////////////////////////
     /// 2. Chart Dimensions  ///
