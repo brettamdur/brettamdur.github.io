@@ -34,11 +34,23 @@
     </style>     -->
 <body>
 
+    <div id="observablehq-chart-7095c9b3"></div>
+    <p>Credit: <a href="https://observablehq.com/d/308eca988758e1cd@702">Zoomable Circle Packing: BA Test Version #2 by scoop</a></p>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+    <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+        import define from "https://api.observablehq.com/d/308eca988758e1cd@702.js?v=3";
+        new Runtime().module(define, name => {
+        if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-7095c9b3"));
+        });
+    </script>
+
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script> -->
     <!-- <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script> --> 
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
-    <script src="./pack_2.js"></script>
+    <!-- <script src="./pack_2.js"></script> -->
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
     <!-- <script src="../stickyfill.min.js"></script> -->
     <!-- <script src="./scrollama.min.js"></script> -->
@@ -51,17 +63,53 @@
     <!-- <script src="https://d3js.org/d3-hierarchy.v2.min.js"></script> -->
     <!-- <script src="pack.js"></script>    --> 
 
-    <div id="observablehq-graphic-661d58ec"></div>
-    <p>Credit: <a href="https://observablehq.com/@observablehq/advanced-embeds">Advanced embedding and downloading by Observable</a></p>
+    <!-- <div id="observablehq-graphic-661d58ec"></div>
+    <p>Credit: <a href="https://observablehq.com/@observablehq/advanced-embeds">Advanced embedding and downloading by Observable</a></p> -->
     
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+    <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+        import define from "https://api.observablehq.com/@observablehq/advanced-embeds.js?v=3";
+        new Runtime().module(define, name => {
+        if (name === "graphic") return new Inspector(document.querySelector("#observablehq-graphic-661d58ec"));
+        });
+    </script> -->
+
+    <!-- <div id="observablehq-chart-8c3b4246"></div>
+    <p>Credit: <a href="https://observablehq.com/@d3/sankey">Sankey Diagram by D3</a></p>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
     <script type="module">
-    import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-    import define from "https://api.observablehq.com/@observablehq/advanced-embeds.js?v=3";
-    new Runtime().module(define, name => {
-      if (name === "graphic") return new Inspector(document.querySelector("#observablehq-graphic-661d58ec"));
-    });
-    </script>
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+        import define from "https://api.observablehq.com/@d3/sankey.js?v=3";
+        new Runtime().module(define, name => {
+        if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-8c3b4246"));
+        });
+    </script> -->
     
+
+    <!-- <div id="observablehq-77041b8d"></div>
+    <p>Credit: <a href="https://observablehq.com/@observablehq/learning-observable-cell-modes-reactive-markdown-and-html">Learning Observable: Cell modes, reactive Markdown, and HTML by Observable</a></p>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+    <script type="module">
+        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+        import define from "https://api.observablehq.com/@observablehq/learning-observable-cell-modes-reactive-markdown-and-html.js?v=3";
+        new Runtime().module(define, Inspector.into("#observablehq-77041b8d"));
+    </script> -->
+
+
+<div id="observablehq-chart2-2ae8a6b5"></div>
+<p>Credit: <a href="https://observablehq.com/d/3d2871b82ef901e8@336">Zoomable Circle Packing: BA Test Version by scoop</a></p>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/d/3d2871b82ef901e8@336.js?v=3";
+new Runtime().module(define, name => {
+  if (name === "chart2") return new Inspector(document.querySelector("#observablehq-chart2-2ae8a6b5"));
+});
+</script>
+
 </body>
 </html>

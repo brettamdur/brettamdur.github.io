@@ -1,42 +1,157 @@
-agency,bureau,outlay24
-Department of Health and Human Services,Centers for Medicare and Medicaid Services,1634942
-Social Security Administration,Social Security Administration,1527813
-Department of the Treasury,Interest on the Public Debt,1006910
-Department of the Treasury,Internal Revenue Service,456971
-Department of Defense--Military Programs,Operation and Maintenance,345718
-Department of Defense--Military Programs,Military Personnel,193512
-Department of Veterans Affairs,Benefits Programs,187978
-Department of Agriculture,Food and Nutrition Service,161585
-Department of Defense--Military Programs,Procurement,156374
-Department of Defense--Military Programs,"Research, Development, Test, and Evaluation",147553
-Office of Personnel Management,Office of Personnel Management,126072
-Department of Veterans Affairs,Veterans Health Administration,124824
-Department of Health and Human Services,Administration for Children and Families,102436
-Department of Education,Office of Elementary and Secondary Education,88764
-Department of Transportation,Federal Highway Administration,65755
-Department of Education,Office of Federal Student Aid,55951
-Department of Health and Human Services,National Institutes of Health,46281
-Department of Homeland Security,Federal Emergency Management Agency,44094
-Department of Health and Human Services,Departmental Management,32660
-Department of Transportation,Federal Aviation Administration,26960
-Department of Homeland Security,U.S. Customs and Border Protection,20832
-Department of Transportation,Federal Transit Administration,20105
-Department of Education,Office of Special Education and Rehabilitative Services,18094
-Department of the Treasury,Fiscal Service,17606
-Department of Health and Human Services,Health Resources and Services Administration,17196
-Department of Homeland Security,United States Coast Guard,15263
-Department of Defense--Military Programs,Military Construction,15185
-Department of Agriculture,Risk Management Agency,14723
-Department of Veterans Affairs,Departmental Administration,12240
-Department of Agriculture,Forest Service,11662
-Department of Agriculture,Natural Resources Conservation Service,9379
-Department of Homeland Security,U.S. Immigration and Customs Enforcement,8181
-Department of Agriculture,Farm Service Agency,8179
-Department of the Treasury,Departmental Offices,7764
-Department of Homeland Security,Transportation Security Administration,6725
-Department of Transportation,Federal Railroad Administration,5591
-Department of Education,Office of Postsecondary Education,4027
-Department of Transportation,Office of the Secretary,2701
-Department of Education,"Office of Career, Technical, and Adult Education",2054
-Department of the Treasury,Alcohol and Tobacco Tax and Trade Bureau,556
-Department of Veterans Affairs,Department of Veterans Affairs,-4551
+"parent","child","outlay24","outlay23","diff","pctdiff"
+"BudgetRoot","Department of Health and Human Services",NA,NA,NA,NA
+"BudgetRoot","Social Security Administration",NA,NA,NA,NA
+"BudgetRoot","Department of the Treasury",NA,NA,NA,NA
+"BudgetRoot","Department of Defense--Military Programs",NA,NA,NA,NA
+"BudgetRoot","Department of Veterans Affairs",NA,NA,NA,NA
+"BudgetRoot","Department of Agriculture",NA,NA,NA,NA
+"BudgetRoot","Office of Personnel Management",NA,NA,NA,NA
+"BudgetRoot","Department of Education",NA,NA,NA,NA
+"BudgetRoot","Other Defense--Civil Programs",NA,NA,NA,NA
+"BudgetRoot","Department of Transportation",NA,NA,NA,NA
+"BudgetRoot","Department of Labor",NA,NA,NA,NA
+"BudgetRoot","Department of Homeland Security",NA,NA,NA,NA
+"BudgetRoot","Department of Housing and Urban Development",NA,NA,NA,NA
+"BudgetRoot","Environmental Protection Agency",NA,NA,NA,NA
+"BudgetRoot","Department of Energy",NA,NA,NA,NA
+"BudgetRoot","National Aeronautics and Space Administration",NA,NA,NA,NA
+"BudgetRoot","Allowances",NA,NA,NA,NA
+"BudgetRoot","Department of State",NA,NA,NA,NA
+"BudgetRoot","Federal Communications Commission",NA,NA,NA,NA
+"BudgetRoot","International Assistance Programs",NA,NA,NA,NA
+"BudgetRoot","Department of Justice",NA,NA,NA,NA
+"BudgetRoot","National Science Foundation",NA,NA,NA,NA
+"BudgetRoot","Judicial Branch",NA,NA,NA,NA
+"BudgetRoot","Department of Commerce",NA,NA,NA,NA
+"BudgetRoot","Corps of Engineers--Civil Works",NA,NA,NA,NA
+"BudgetRoot","Railroad Retirement Board",NA,NA,NA,NA
+"BudgetRoot","Department of the Interior",NA,NA,NA,NA
+"BudgetRoot","Federal Deposit Insurance Corporation",NA,NA,NA,NA
+"BudgetRoot","Legislative Branch",NA,NA,NA,NA
+"BudgetRoot","Election Assistance Commission",NA,NA,NA,NA
+"BudgetRoot","Small Business Administration",NA,NA,NA,NA
+"BudgetRoot","Smithsonian Institution",NA,NA,NA,NA
+"BudgetRoot","Corporation for National and Community Service",NA,NA,NA,NA
+"BudgetRoot","Tennessee Valley Authority",NA,NA,NA,NA
+"BudgetRoot","Bureau of Consumer Financial Protection",NA,NA,NA,NA
+"BudgetRoot","District of Columbia",NA,NA,NA,NA
+"","BudgetRoot",NA,NA,NA,NA
+"Department of Health and Human Services","Centers for Medicare and Medicaid Services",1634942,1652744,-17802,-0.0107711781134888
+"Social Security Administration","Social Security Administration - Bureau",1527813,1414968,112845,0.0797509201621521
+"Department of the Treasury","Interest on the Public Debt",1006910,897717,109193,0.121634100724393
+"Department of the Treasury","Internal Revenue Service",456971,228729,228242,0.997870842787753
+"Department of Defense--Military Programs","Operation and Maintenance",345718,309958,35760,0.115370469547487
+"Department of Defense--Military Programs","Military Personnel",193512,184563,8949,0.0484875083304888
+"Department of Veterans Affairs","Benefits Programs",187978,172275,15703,0.0911507763749819
+"Department of Agriculture","Food and Nutrition Service",161585,188602,-27017,-0.143248746036627
+"Department of Defense--Military Programs","Procurement",156374,141079,15295,0.108414434465796
+"Department of Defense--Military Programs","Research, Development, Test, and Evaluation",147553,122940,24613,0.200203351228241
+"Office of Personnel Management","Office of Personnel Management - Bureau",126072,122978,3094,0.0251589715233619
+"Department of Veterans Affairs","Veterans Health Administration",124824,120598,4226,0.035042040498184
+"Department of Health and Human Services","Administration for Children and Families",102436,92397,10039,0.108650713767763
+"Department of Education","Office of Elementary and Secondary Education",88764,107736,-18972,-0.176097126308755
+"Other Defense--Civil Programs","Military Retirement",72181,74071,-1890,-0.025516058916445
+"Department of Transportation","Federal Highway Administration",65755,58224,7531,0.129345287166804
+"Department of Labor","Employment and Training Administration",63291,45547,17744,0.389575603223044
+"Department of Education","Office of Federal Student Aid",55951,105860,-49909,-0.471462308709616
+"Department of Health and Human Services","National Institutes of Health",46281,44759,1522,0.0340043343238231
+"Department of Homeland Security","Federal Emergency Management Agency",44094,47298,-3204,-0.0677407078523405
+"Department of Housing and Urban Development","Public and Indian Housing Programs",43862,39402,4460,0.113192223744988
+"Environmental Protection Agency","Environmental Protection Agency - Bureau",38526,20265,18261,0.901110288675055
+"Department of Health and Human Services","Departmental Management",32660,34421,-1761,-0.0511606286859766
+"Department of Energy","Energy Programs",30973,18199,12774,0.701906698170229
+"Department of Transportation","Federal Aviation Administration",26960,26317,643,0.0244328760877
+"National Aeronautics and Space Administration","National Aeronautics and Space Administration - Bureau",26322,24864,1458,0.0586389961389961
+"Allowances","Allowances - Bureau",24930,-17770,42700,-2.40292628024761
+"Department of Housing and Urban Development","Community Planning and Development",23354,20284,3070,0.151350818379018
+"Department of Energy","National Nuclear Security Administration",21688,20646,1042,0.050469824663373
+"Department of Homeland Security","U.S. Customs and Border Protection",20832,21121,-289,-0.0136830642488519
+"Department of State","Administration of Foreign Affairs",20716,19230,1486,0.0772750910036401
+"Department of Transportation","Federal Transit Administration",20105,20315,-210,-0.010337189269013
+"Federal Communications Commission","Federal Communications Commission - Bureau",19623,20117,-494,-0.0245563453795298
+"International Assistance Programs","International Security Assistance",18782,27283,-8501,-0.311585969284903
+"Department of Education","Office of Special Education and Rehabilitative Services",18094,16973,1121,0.0660460731750427
+"Department of the Treasury","Fiscal Service",17606,16222,1384,0.0853162372087289
+"Department of State","Other",17200,17571,-371,-0.0211143361220192
+"Department of Health and Human Services","Health Resources and Services Administration",17196,17051,145,0.00850390006451235
+"Department of Homeland Security","United States Coast Guard",15263,16074,-811,-0.0504541495582929
+"Department of Defense--Military Programs","Military Construction",15185,11399,3786,0.332134397754189
+"Department of Agriculture","Risk Management Agency",14723,17132,-2409,-0.140614055568527
+"Other Defense--Civil Programs","Retiree Health Care",13028,12156,872,0.0717341230667983
+"Department of Justice","Legal Activities and U.S. Marshals",12599,12517,82,0.00655109051689702
+"Department of Justice","Federal Bureau of Investigation",12564,11395,1169,0.10258885476086
+"Department of Veterans Affairs","Departmental Administration",12240,16218,-3978,-0.245283018867925
+"International Assistance Programs","Agency for International Development",11679,12325,-646,-0.0524137931034483
+"Department of Agriculture","Forest Service",11662,11249,413,0.0367143746110765
+"National Science Foundation","National Science Foundation - Bureau",10591,9311,1280,0.137471807539469
+"Judicial Branch","Courts of Appeals, District Courts, and Other Judicial Services",10556,9361,1195,0.127657301570345
+"Department of Housing and Urban Development","Housing Programs",10195,4684,5511,1.1765584970111
+"Department of Energy","Environmental and Other Defense Activities",9901,9484,417,0.0439687895402784
+"Department of Agriculture","Natural Resources Conservation Service",9379,6257,3122,0.498961163496883
+"Department of Commerce","National Oceanic and Atmospheric Administration",8746,7480,1266,0.169251336898396
+"Department of Justice","Federal Prison System",8615,8689,-74,-0.00851651513407757
+"Corps of Engineers--Civil Works","Corps of Engineers--Civil Works - Bureau",8306,8286,20,0.00241370987207338
+"Department of Justice","State, Local, and Tribal Justice Assistance",8272,11628,-3356,-0.288613691090471
+"Department of Homeland Security","U.S. Immigration and Customs Enforcement",8181,6970,1211,0.173744619799139
+"Department of Agriculture","Farm Service Agency",8179,10896,-2717,-0.249357562408223
+"Railroad Retirement Board","Railroad Retirement Board - Bureau",7816,7686,130,0.0169138693728858
+"Department of the Treasury","Departmental Offices",7764,14554,-6790,-0.466538408684898
+"Department of Homeland Security","Transportation Security Administration",6725,7350,-625,-0.0850340136054422
+"Department of Transportation","Federal Railroad Administration",5591,4253,1338,0.314601457794498
+"Department of the Interior","National Park Service",5453,4859,594,0.122247376003293
+"Department of Labor","Pension Benefit Guaranty Corporation",5432,48613,-43181,-0.888260341883858
+"Department of the Interior","Bureau of Reclamation",4798,6535,-1737,-0.265799540933435
+"Federal Deposit Insurance Corporation","Orderly Liquidation",4767,1979,2788,1.40879231935321
+"Department of the Interior","Department-Wide Programs",4582,4009,573,0.142928411075081
+"Department of the Interior","United States Fish and Wildlife Service",4574,4235,339,0.080047225501771
+"Department of the Interior","Departmental Offices",4261,4496,-235,-0.0522686832740214
+"International Assistance Programs","Multilateral Assistance",4221,3329,892,0.267948332832682
+"Department of Education","Office of Postsecondary Education",4027,3808,219,0.0575105042016807
+"Department of Labor","Office of Workers' Compensation Programs",3737,3140,597,0.190127388535032
+"Department of Commerce","National Institute of Standards and Technology",3629,1896,1733,0.914029535864979
+"Department of State","International Organizations and Conferences",3346,2725,621,0.227889908256881
+"Department of Justice","Drug Enforcement Administration",3248,3230,18,0.00557275541795666
+"Department of Transportation","Office of the Secretary",2701,2547,154,0.0604632901452689
+"Department of Commerce","National Telecommunications and Information Administration",2644,1478,1166,0.788903924221922
+"Department of Housing and Urban Development","Management and Administration",2426,2395,31,0.0129436325678497
+"Department of Commerce","Economic Development Administration",2081,1527,554,0.362802881466929
+"Department of Education","Office of Career, Technical, and Adult Education",2054,1861,193,0.103707684040838
+"Legislative Branch","House of Representatives",1993,1781,212,0.119034250421112
+"Election Assistance Commission","Election Assistance Commission - Bureau",1952,115,1837,15.9739130434783
+"Small Business Administration","Small Business Administration - Bureau",1906,27376,-25470,-0.930376972530684
+"Department of Commerce","Bureau of the Census",1659,2208,-549,-0.248641304347826
+"Smithsonian Institution","Smithsonian Institution - Bureau",1562,1515,47,0.031023102310231
+"Legislative Branch","Senate",1302,1615,-313,-0.193808049535604
+"Corporation for National and Community Service","Corporation for National and Community Service - Bureau",1289,2097,-808,-0.385312350977587
+"Tennessee Valley Authority","Tennessee Valley Authority - Bureau",1156,605,551,0.910743801652893
+"Legislative Branch","Architect of the Capitol",1131,1107,24,0.021680216802168
+"Bureau of Consumer Financial Protection","Bureau of Consumer Financial Protection - Bureau",1052,890,162,0.182022471910112
+"Legislative Branch","Government Accountability Office",882,823,59,0.0716889428918591
+"Legislative Branch","Capitol Police",847,752,95,0.126329787234043
+"International Assistance Programs","United States International Development Finance Corporation",805,695,110,0.158273381294964
+"Department of Labor","Occupational Safety and Health Administration",725,653,72,0.110260336906585
+"Department of Labor","Departmental Management",723,623,100,0.160513643659711
+"District of Columbia","District of Columbia General and Special Payments",681,667,14,0.0209895052473763
+"International Assistance Programs","Millennium Challenge Corporation",671,819,-148,-0.180708180708181
+"Department of Energy","Departmental Administration",564,597,-33,-0.0552763819095477
+"Department of the Treasury","Alcohol and Tobacco Tax and Trade Bureau",556,542,14,0.025830258302583
+"District of Columbia","District of Columbia Courts",360,331,29,0.0876132930513595
+"Department of Housing and Urban Development","Office of Lead Hazard Control and Healthy Homes",318,200,118,0.59
+"Department of State","International Commissions",222,252,-30,-0.119047619047619
+"Judicial Branch","Judicial Retirement Funds",186,178,8,0.0449438202247191
+"Judicial Branch","Supreme Court of the United States",152,150,2,0.0133333333333333
+"Other Defense--Civil Programs","Cemeterial Expenses",149,154,-5,-0.0324675324675325
+"Other Defense--Civil Programs","American Battle Monuments Commission",128,88,40,0.454545454545455
+"Judicial Branch","Administrative Office of the United States Courts",115,103,12,0.116504854368932
+"Other Defense--Civil Programs","Armed Forces Retirement Home",93,57,36,0.631578947368421
+"Federal Deposit Insurance Corporation","FDIC_Office of Inspector General",50,48,2,0.0416666666666667
+"Judicial Branch","United States Court of Appeals for the Federal Circuit",44,41,3,0.0731707317073171
+"District of Columbia","District of Columbia - Bureau",0,0,0,NA
+"District of Columbia","District of Columbia Corrections",0,0,0,NA
+"District of Columbia","District of Columbia Financing",0,0,0,NA
+"Federal Deposit Insurance Corporation","Bank Insurance",0,0,0,NA
+"Federal Deposit Insurance Corporation","Federal Deposit Insurance Corporation, activities",0,0,0,NA
+"Federal Deposit Insurance Corporation","FSLIC Resolution",-36,-34,-2,0.0588235294117647
+"Department of Energy","Power Marketing Administration",-608,-314,-294,0.936305732484076
+"Department of Veterans Affairs","Department of Veterans Affairs - Bureau",-4551,-4562,11,-0.00241122314774222
+"Department of State","Department of State - Bureau",-4997,-5112,115,-0.0224960876369327
