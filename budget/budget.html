@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://127.0.0.1:5501/debt/debt.html -->
+<html lang="en">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Debt By Party</title>
+    <!-- <base href="/senateElections/"> -->
+    <link rel="stylesheet" href="./budget_files/budget.css">
+    <!-- <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'> -->
+    <script src="./budget_files/jquery-3.6.0.min.js"></script>
+    <link href="./budget_files/css" rel="stylesheet">
+    <!-- <style>
+    </style> -->
+</head>
+<body>
+    <main>
+        <div id="container">
+            <div id="heading">
+                <div id="articletitle">
+                    <div id="articletitle_main">
+                        <p> 
+                            Fun With<br>Budget Bubbles:<br> An Interactive Look at President Biden's Proposed Spending
+                        </p>
+                    </div>
+                
+                </div>
+                <div id="headingimage">
+                    <img src="./pencil.png" width="75%" id="pencil">
+                </div>           
+            </div>
+            <p id="subtitle">
+                Overwhelmed by numbers in the trillions? This interactive visualization lets you explore the President's proposed budget in a way that's easy to understand.
+            </p>
+            <div id="datebyline">
+                <strong>DRAFT / WORK IN PROGRESS: NOT FOR DISTRIBUTION</strong>
+            </div> 
+            <div class="pointcontainer">
+                <div class="pointtext">
+
+                    <div id="introText">
+                        <p>
+                            <strong>Coverage.</strong> This chart shows the major components of President Biden's proposed fiscal 2024 federal spending budget.  It includes all 36 federal departments with a proposed budget of over $1 billion, and shows the top five divisions within each of those departments.
+                        </p>
+
+                        <p>
+                            <strong>Instructions.</strong> The size of each bubble is proportional to the relative amount of spending across the departments and divisions.  Green bubbles represent proposed spending increases over 2023, while orange bubbles represent proposed spending decreases.  Darker shades represent larger increases or decreases.  Hover over any bubble to see details about the department or agency.  Click on any department (the blue circles) to zoom into its top five divisions.
+                    </div>
+
+                        <div id="observablehq-chart-623789f8"></div>
+
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+                        <script type="module">
+                            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+                            import define from "https://api.observablehq.com/d/d0574d3f09eff410@1253.js?v=3";
+                            new Runtime().module(define, name => {
+                            if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-623789f8"));
+                            });
+                        </script>
+                </div>
+            </div>
+        </div> 
+    </main>
+
+    
+
+    
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+<!--
+
+Parts of the visualization on this page are based on the example at https://observablehq.com/@d3/zoomable-circle-packing, Copyright 2018–2020 Observable, Inc.  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+-->
+
+</body>
+</html>
