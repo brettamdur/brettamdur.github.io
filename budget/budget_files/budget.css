@@ -70,6 +70,14 @@
 
 }
 
+#chartTitle{
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .pointcontainer{
     display: flex;
     flex-wrap: wrap;
@@ -131,6 +139,10 @@
     margin-left: 10px;
     margin-right: 65px;
     width: 20%   
+}
+
+li{
+    margin: 0px 0;
 }
 
 #scrolly {
@@ -212,8 +224,4 @@ figure {
     font-family: 'Inter';
     /* margin-right: 0px; */
     padding-top: 10px;
-}
-
-li{
-    margin-bottom: 18px;   
 }

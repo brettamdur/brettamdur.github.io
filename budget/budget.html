@@ -31,34 +31,59 @@
                 </div>           
             </div>
             <p id="subtitle">
-                Overwhelmed by numbers in the trillions? This interactive visualization lets you explore the President's proposed budget in a way that's easy to understand.
+                Overwhelmed by numbers in the trillions? This interactive visualization gives you an easy way to explore the President's proposed budget.
             </p>
             <div id="datebyline">
-                <strong>DRAFT / WORK IN PROGRESS: NOT FOR DISTRIBUTION</strong>
+                April 6, 2023<br>   
+                By Brett Amdur
             </div> 
             <div class="pointcontainer">
                 <div class="pointtext">
 
                     <div id="introText">
                         <p>
-                            <strong>Coverage.</strong> This chart shows the major components of President Biden's proposed fiscal 2024 federal spending budget.  It includes all 36 federal agencies with a proposed budget of over $1 billion, and shows the top five divisions within each of those agencies.  There are, in fact, 241 agencies listed in the federal budget, but the spending of the 36 shown here represents more than 90% of total spending.
+                            This chart shows the major components of President Biden's proposed fiscal 2024 federal spending budget.  It includes all 36 federal agencies with a proposed budget of over $1 billion, and shows the top five divisions within each of those agencies.  There are, in fact, 241 agencies listed in the federal budget, but the 36 shown here represent more than 90% of total spending.
                         </p>
 
                         <p>
-                            <strong>Instructions.</strong> The size of each bubble is proportional to the relative amount of spending across the agencies and their divisions.  Green bubbles represent proposed spending increases over 2023, while orange bubbles represent proposed spending decreases.  Darker shades represent larger increases or decreases.  Hover over any bubble to see details about the agency or division.  Click on any agency (the blue circles) to zoom into its top five divisions.
+                            <strong>Instructions:</strong> 
+                            <ul>
+                                <li>
+                                    The size of each bubble is proportional to the relative amount of spending across the agencies and their divisions.  
+                                </li>
+                                <li>
+                                    Click on any agency (the blue circles) to zoom into its top five divisions.
+                                </li>
+                                <li>
+                                    Hover over any bubble to see details about the agency or division.
+                                </li>
+                                <li>
+                                    Green bubbles represent proposed spending increases over 2023, while orange bubbles represent proposed spending decreases.  Darker shades represent larger increases or decreases.  
+                                </li>
+                            </ul>
+                    </div>
+                    <div id="chartTitle">
+                        <p>
+                            Biden Administration's Proposed Federal Spending for Fiscal 2024
+                        </p>
                     </div>
 
-                        <div id="observablehq-chart-623789f8"></div>
+                    <div id="observablehq-chart-623789f8"></div>
 
-                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-                        <script type="module">
-                            import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-                            import define from "https://api.observablehq.com/d/d0574d3f09eff410@1253.js?v=3";
-                            new Runtime().module(define, name => {
-                            if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-623789f8"));
-                            });
-                        </script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+                    <script type="module">
+                        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+                        import define from "https://api.observablehq.com/d/d0574d3f09eff410@1253.js?v=3";
+                        new Runtime().module(define, name => {
+                        if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-623789f8"));
+                        });
+                    </script>
                 </div>
+            </div>
+            <div>
+                <p>
+                    Source: https://www.whitehouse.gov/wp-content/uploads/2023/03/outlays_fy2024.xlsx
+                </p>
             </div>
         </div> 
     </main>
