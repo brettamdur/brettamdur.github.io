@@ -92,16 +92,11 @@ async function drawCharts() {
   
 
     // Note that to update an already redered chart with new data, this function can't include the svg creation code. Otherwise the binding of the new data would happen on new svg elements, not the existing ones.
-    function drawDeviationChart(ECVData, view){
+    function drawDeviationChart(ECVData, view, direction){
     
           //////////////////////////////
          /// 4. Create Scales      ////
         //////////////////////////////
-
-        /* const xScale = d3.scaleLinear()
-            .domain(d3.extent(ECVData, d => d.ECVPM_Deviation))
-            .range([0, dataAreaWidth])
-            .nice() */
         
         const xScale = d3.scaleLinear()
             .domain(d3.extent(ECVData, d => {
@@ -228,14 +223,21 @@ async function drawCharts() {
                 }
             })
         
-        if(!d3.select("#xAxisGroup").empty()){
-            d3.select("#xAxisGroup")
+        console.log(view)
+
+        if(
+            !d3.select("#xAxisGroup").empty() && 
+            (
+                (view == 2 && direction == "down") ||
+                (view == 1 && direction == "up")
+            )
+        ){
+            console.log("both")
+            d3.selectAll("#xAxisGroup")
             .transition()
             .duration(100)
-            // .style('opacity', 0)
             .remove()
             .call(updateXAxis)
-            //.on("end", updateXAxis)
         }
         else {
             updateXAxis()
@@ -243,7 +245,7 @@ async function drawCharts() {
 
         function updateXAxis(){
 
-           // create the x-axis object
+           // define a function to create the x-axis object
             var xAxis = d3.axisBottom(xScale)
                 .tickSize(-dataAreaHeight)
                 .tickFormat(d => d)
@@ -262,7 +264,7 @@ async function drawCharts() {
         }
         
         d3.selectAll(".tick line").style("stroke", "lightgray")
-        // d3.select(".tick line").style("stroke", "blue")
+        //d3.selectAll(".tick line").style("stroke", "blue")
 
         // draw the title
         if(view == 0){
@@ -304,17 +306,6 @@ async function drawCharts() {
             console.log("got here")
         }
         
-        /* else{  // if we're working on view 0 or 1, remove the subtitle if it's already been drawn
-            if(d3.select("#ECVPMsubTitle").empty()){
-                console.log(view + ' empty')
-            }
-            else{
-                d3.select("#ECVPMsubTitle")
-                .remove()
-                console.log(view + ' removed')
-                
-            }
-        } */
 
         // draw the x-axis label
         deviationPerfArea.append("text")
@@ -419,19 +410,19 @@ async function drawCharts() {
         // update text inside figure area based on step
         // figure.select("p").text(response.index + 1);
         if(response.index == 0){
-            drawDeviationChart(data2020, 0)
+            drawDeviationChart(data2020, 0, response.direction)
         } 
         else{
             if(response.index == 1){
-                drawDeviationChart(data2020, 1)
+                drawDeviationChart(data2020, 1, response.direction)
             }
             else{
                 if(response.index == 2){
-                    drawDeviationChart(data2020, 2)
+                    drawDeviationChart(data2020, 2, response.direction)
                 }
                 else{
                     if(response.index == 3){
-                        drawDeviationChart(data2020, 3)
+                        drawDeviationChart(data2020, 3, response.direction)
                     }
                 }
             }
