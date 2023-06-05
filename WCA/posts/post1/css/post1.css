@@ -1,0 +1,100 @@
+.heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5em;
+}
+.heading h1 {
+    flex-basis: 60%;
+    margin: 0;
+}
+.heading img {
+    flex-basis: 30%;
+    max-width: 30%;
+}
+
+/* **************** */
+
+/* #chartArea {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+  } */
+  /* #chartArea > div {
+    flex: 1 0 21%; 
+    margin: 1%; 
+  }
+  #chartArea > div > svg {
+    width: 100%;
+    height: auto;
+  }  */
+
+
+/* #chartArea {
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+#chartArea > div {
+    flex: 1 1 50%; 
+    margin: 1%; 
+}
+
+#chartArea > div > svg {
+    width: 100%;
+    height: 100%;
+} */
+
+#chartArea {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-top: 25px;
+    max-width: 900px;
+    justify-content: center; */
+  }
+
+  /* #chartArea.reflow {
+    flex-wrap: nowrap;
+  } */
+  
+/* #chartArea .chart {
+    flex: 1 1 auto;
+    margin: 1%;
+    width: calc(50% - 2%);
+    height: auto;
+    max-width: 100%; 
+    max-height: 100%; 
+  } */
+  
+  .axes {
+    width: 75%;
+    height: auto; /* maintain aspect ratio */
+    /* center items with this class inside their container*/
+    margin-left: 5px;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  
+  
+
+/* ***************** */
+
+
+
+@media (max-width: 700px) {
+    .heading h1,
+    .heading img {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    .heading img {
+        margin: 2em 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .bar-chart-wrapper .bar-chart-steps > div:last-child {
+        margin-bottom: -60vh;
+    }
+}
