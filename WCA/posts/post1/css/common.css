@@ -52,14 +52,42 @@ a {
 
 .bar-chart-wrapper .to-pin {
     flex-basis: 70%;
+    /* ADDED BY BA: */
+    height: 100%;
 }
 
 .bar-chart-wrapper .chart-body {
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
 }
+
+.chart-body{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.container1, .container2 {
+    position: absolute;  /* This allows the divs to be placed in the same place */
+    top: 0;  /* Top and left are set to 0 to start the divs from the top left corner */
+    left: 0;  /* of the .chart-body div */
+    width: 100%;  /* The divs take the full width of the .chart-body div */
+    height: 100%;  /* The divs take the full height of the .chart-body div */
+  }
+
+.container1 {
+    z-index: 1;
+    opacity: .7
+}
+
+
 
 .chart-body svg {
     width: 100%;
@@ -110,3 +138,42 @@ a {
 .afterChartsText {
     margin-top: 6em;
 }
+
+.chartArea{
+    display: inline-flex;
+    position: relative;
+}
+
+.histDiv{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.chartContent{
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.toggleContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* .toggleDiv{
+    display: inline-flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    /* margin: 0 1em; */
+} */
+

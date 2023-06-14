@@ -37,17 +37,29 @@ function drawChart(medianByTract) {
         d.county === "Suffolk"
     )
 
-    function drawHist(countyScope, yMax, chartSize){
+    function drawHist(countyScope, yMax, chartSize, container){
 
         ////////////////////////////////////////////////
         /////////// SVG SETUP /////////////////////////
         //////////////////////////////////////////////
 
-        var svg = d3.select("#chartArea")
-            .append("div")
-            .attr("class", "histDiv")
-            .append("svg")
-            .attr("class", "chart")
+        // if (d3.select(".histDiv#" + countyScope).node()) {
+        //     // div with id = countyScope exists
+        //     svg = d3.select(".histDiv#" + countyScope)
+        //         .append("svg")
+        // } else {
+        //     // div with id = countyScope does not exist
+            svg = d3.select(".container" + container)
+                .append("div")
+                .attr("class", "chartArea")
+                .append("div")
+                .attr("class", "histDiv") 
+                .attr("id", countyScope)
+                .append("svg")
+        // }           
+        svg
+            // .append("svg")
+            .attr("class", "chartContent")
             .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
             // .attr("width", width + margin.left + margin.right)
             // .attr("height", height + margin.top + margin.bottom)
@@ -64,6 +76,7 @@ function drawChart(medianByTract) {
                     height + margin.top + margin.bottom
                 })
             // .append("g")
+            // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         
         ////////////////////////////////////////////////
@@ -168,7 +181,13 @@ function drawChart(medianByTract) {
             // .attr("width", function(d) { return xScale(d.x1) - xScale(d.x0) -1 ; })
             .attr("width", function(d) { return xScale(xScale.domain()[1] / 30) - xScale(0) - 1; })
             .attr("height", function(d) { return height - yScale(d.length); }) // SWITCH
-            .style("fill", "#7eb0d5")
+            .style("fill", function(d) {
+                if(container == 1){  
+                    return "#7eb0d5"
+                 } else {
+                    return "orange"
+                }
+            })
 
         ////////////////////////////////////////////////
         /////////// PERIPHERALS ///////////////////////
@@ -285,7 +304,6 @@ function drawChart(medianByTract) {
         d3.csv("./data/bucketsByTract.csv").then(d => {
             // var householdCount = d
             var householdCount = d.filter(d => d.county === countyScope)
-            console.log(householdCount)
               
             householdCount.sort(function(a, b) {
                 var incomeA = parseFloat(a.income.split("-")[0]);
@@ -293,7 +311,7 @@ function drawChart(medianByTract) {
                 return incomeA - incomeB;
             });
               
-            console.log(householdCount);
+            // console.log(householdCount);
               
 
 
@@ -304,11 +322,14 @@ function drawChart(medianByTract) {
             /////////// SVG SETUP /////////////////////////
             //////////////////////////////////////////////
 
-            var svg = d3.select("#chartArea")
+            var svg = d3.select(".container2")
+                .append("div")
+                .attr("class", "chartArea")
                 .append("div")
                 .attr("class", "histDiv")
+                .attr("id", (d, i) => `${countyScope}`)
                 .append("svg")
-                .attr("class", "chart")
+                .attr("class", "chartContent")
                 .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom))
                 .attr("width", function(){
                     return chartSize == "small" ? 
@@ -408,7 +429,8 @@ function drawChart(medianByTract) {
                 .attr("width", d => barColorWidth)
                 // .attr("height", 10)
                 .attr("height", d => height - yScale(d.estimate))
-                .style("fill", "#7eb0d5")
+                // .style("fill", "#7eb0d5")
+                .style("fill", "orange")
 
             ////////////////////////////////////////////////
             /////////// PERIPHERALS ///////////////////////
@@ -462,8 +484,14 @@ function drawChart(medianByTract) {
             reduceDeets()
 
             // hide the svg if it's not the first one
-            var svgCount = d3.selectAll("svg").size();
-            svgCount == 1 ? svg.attr("opacity", 1) : svg.attr("opacity", 0);            
+            // var svgCount = d3.selectAll("svg").size();
+            // svgCount == 1 ? svg.attr("opacity", 1) : svg.attr("opacity", 0);        
+            
+            // select any chartArea that doesn't have child elements and remove it
+            d3.selectAll(".chartArea").filter(function() {
+                return !this.hasChildNodes();
+            })
+            .remove();
         })
     }
 
@@ -506,12 +534,13 @@ function drawChart(medianByTract) {
 
                     if(count === 0) {
                         var lollipopHeight = 700;
-                        var lollipopDiv = d3.select("#chartArea")
+                        var lollipopDiv = d3.select(".chartArea")
                             .append("div")
                             .attr("class", "lollipopDiv")
                         var lollipopSvg = lollipopDiv
                             .append("svg")
                             .attr("transform", "translate(" + margin.left + "," + (margin.top + 18) + ")")
+                            .attr("transform", "translate(" + margin.left + ", 0)")
                             .attr("class", "lollipopChart")
                             // .attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " +  (lollipopHeight + margin.top + margin.bottom))
                             .attr("width", width + margin.left + margin.right)
@@ -644,104 +673,19 @@ function drawChart(medianByTract) {
                             .style("font-size", "12px")
                             .text("USD ($000s)");
                     }
-                })         
+
+                    // select all chartArea divs that do not have any divs under them and remove them
+                    d3.selectAll(".chartArea")
+                        .filter(function() {
+                            return !this.hasChildNodes();
+                        }
+                        )
+                        .remove()  
+                    })  
+                
     }
 
-    function drawIncomeAlone() {
-
-        ////////////////////////////////////////////////
-        /////////// DATA SETUP ////////////////////////
-        //////////////////////////////////////////////
-
-        d3.csv("./data/bucketsByTract.csv").then(d => {
-            var householdCount = d
-            console.log(householdCount);
-        });
-
-        /////////////////////////////////////////////
-        /////////// SVG AREA SET UP ////////////////
-        ///////////////////////////////////////////
-
-        // clear the playing field and create a new svg
-        // d3.select("svg")
-        //     .transition()
-        //     .duration(1000)
-        //     .attr("opacity", 0)
-            // .on("end", function() {
-            //     return d3.select(this).remove();
-            // })
-
-        d3.select("svg")
-            .transition()
-            .duration(1000)
-            .style("opacity", 0)
-            .on("end", function() {
-                d3.select(".lollipopDiv").remove();
-                drawHist("Westchester", 90, "small");
-                drawHist("Bronx", 90, "small");
-                drawHist("Erie", 90, "small");
-                drawHist("Kings", 90, "small");
-                drawHist("Nassau", 90, "small");
-                drawHist("New York", 90, "small");
-                drawHist("Queens", 90, "small");
-                drawHist("Suffolk", 90, "small");
-                d3.selectAll(".yAxis .domain").style("stroke", "blue")
-                d3.selectAll(".xAxis .domain").style("stroke", "blue")
-                d3.selectAll(".tick").remove()
-                d3.select(".chartTitle").text("Westchester")
-                d3.selectAll(".chartTitle")
-                    .style("font-weight", 600)
-                    .style("font-size", 18)
-                    .attr("y", 70)
-                    .attr("x", svgWidth - margin.right - 80)
-                    .style("text-anchor", "end")
-                d3.selectAll(".yLabel")
-                    .style("font-size", 18)
-                    .attr("x", -20)
-                    .attr("y", 18)
-                d3.selectAll(".xLabel")
-                    .style("font-size", 18)
-                    .attr("y", svgHeight - 24)
-                    // .on("end", function(){
-                    //     return d3.selectAll("svg")
-                    //     .transition()
-                    //     .duration(100)
-                    //     .attr("opacity", 1)
-                    // })
-                d3.selectAll("svg")
-                    .append("text")
-                    .attr("class", "lightAxisValue")
-                    .attr("x", svgWidth - margin.right - 34)
-                    .attr("y", svgHeight - 38)
-                    .attr("text-anchor", "end")
-                    .style("font-size", 16)
-                    .text("250+")
-                d3.selectAll("svg")
-                    .append("text")
-                    .attr("class", "lightAxisValue")
-                    .attr("x", margin.left)
-                    .attr("y", svgHeight - 38)
-                    .attr("text-anchor", "end")
-                    .style("font-size", 16)
-                    .text("0")
-                d3.selectAll("svg")
-                    .append("text")
-                    .attr("class", "lightAxisValue")
-                    .attr("x", margin.left)
-                    .attr("y", margin.top + 16)
-                    .attr("text-anchor", "end")
-                    .style("font-size", 16)
-                    .text("90")
-                d3.selectAll("svg")
-                    .transition()
-                    .duration(500)
-                    .attr("opacity", 1);
-                d3.selectAll(".chartTitle").attr("opacity", 1)
-            })
-          
-    }
-
-    drawHist("Westchester", undefined, "large");
+    drawHist("Westchester", undefined, "large", 1);
 
 
     ////////////////////////////////////////////
@@ -751,7 +695,7 @@ function drawChart(medianByTract) {
     ScrollTrigger.create({
         // NOTE: this doesn't animate anything.  It just pins the chart area to the middle of the screen while scrolling through the steps.
         trigger: ".bar-chart-steps",
-        start: "top -10%",  // first argument is relative to the trigger, second is relative to the viewport.  So this means "When the top of the trigger element hits the top of the viewport, start the animation."
+        start: "top 0%",  // first argument is relative to the trigger, second is relative to the viewport.  So this means "When the top of the trigger element hits the top of the viewport, start the animation."
         end: "bottom 80%", // "When the bottom of the trigger element hits a point 80% of the way down the viewport, end the animation."
         pin: ".to-pin",  
         pinSpacing: false,
@@ -763,7 +707,7 @@ function drawChart(medianByTract) {
         onLeave: function() {
             updateEndStatus("P L");
         },
-        markers: true
+        markers: false
     })
 
     gsap.to("svg", {   
@@ -776,7 +720,7 @@ function drawChart(medianByTract) {
                 transitionSVGs("larger");
                 redrawHist("larger");
             },
-            markers: true,
+            // markers: true,
             onEnter: updateStartStatus("S1 E"),
             onLeave: updateEndStatus("S1 L"),
             onLeaveBack: updateEndStatus("S1 LB"),
@@ -799,7 +743,7 @@ function drawChart(medianByTract) {
                         d3.selectAll("svg").remove()
                         .transition()
                         .duration(1000)
-                        drawHist("Westchester", 90, "large");
+                        drawHist("Westchester", 90, "large", 1);
                     })
             }
 
@@ -813,18 +757,19 @@ function drawChart(medianByTract) {
             end: "bottom 80%",
             // ON ENTER AND ENTERBACK ARE IDENTICAL.  PUT THIS INTO A FUNCTION.
             onEnter: function(){
+                // d3.selectAll("#chartArea").remove();
                 d3.selectAll("svg").transition().duration(1000)
                 .style("opacity", 0)
                     .on("end", function(){
-                        d3.selectAll("svg").remove()
-                        drawHist("Westchester", 90, "small");
-                        drawHist("Bronx", 90, "small");
-                        drawHist("Erie", 90, "small");
-                        drawHist("Kings", 90, "small");
-                        drawHist("Nassau", 90, "small");
-                        drawHist("New York", 90, "small");
-                        drawHist("Queens", 90, "small");
-                        drawHist("Suffolk", 90, "small");
+                        d3.selectAll(".chartArea").remove()
+                        drawHist("Westchester", 90, "small", 1);
+                        drawHist("Bronx", 90, "small" ,1);
+                        drawHist("Erie", 90, "small", 1);
+                        drawHist("Kings", 90, "small", 1);
+                        drawHist("Nassau", 90, "small", 1);
+                        drawHist("New York", 90, "small", 1);
+                        drawHist("Queens", 90, "small", 1);
+                        drawHist("Suffolk", 90, "small", 1);
                         d3.selectAll(".yAxis .domain").style("stroke", "blue")
                         d3.selectAll(".xAxis .domain").style("stroke", "blue")
                         d3.selectAll(".tick").remove()
@@ -883,14 +828,14 @@ function drawChart(medianByTract) {
                 d3.selectAll("svg").transition().duration(1000).style("opacity", 0)
                         .on("end", function(){
                             d3.selectAll("svg").remove()
-                            drawHist("Westchester", 90, "small");
-                            drawHist("Bronx", 90, "small");
-                            drawHist("Erie", 90, "small");
-                            drawHist("Kings", 90, "small");
-                            drawHist("Nassau", 90, "small");
-                            drawHist("New York", 90, "small");
-                            drawHist("Queens", 90, "small");
-                            drawHist("Suffolk", 90, "small");
+                            drawHist("Westchester", 90, "small", 1);
+                            drawHist("Bronx", 90, "small", 1);
+                            drawHist("Erie", 90, "small", 1);
+                            drawHist("Kings", 90, "small", 1);
+                            drawHist("Nassau", 90, "small", 1);
+                            drawHist("New York", 90, "small", 1);
+                            drawHist("Queens", 90, "small", 1);
+                            drawHist("Suffolk", 90, "small", 1);
                             d3.selectAll(".yAxis .domain").style("stroke", "blue")
                             d3.selectAll(".xAxis .domain").style("stroke", "blue")
                             d3.selectAll(".tick").remove()
@@ -945,7 +890,7 @@ function drawChart(medianByTract) {
                             d3.selectAll(".chartTitle").attr("opacity", 1)
                         })
           },
-          markers: true,
+        //   markers: true,
           // toggleActions: "play none reverse reverse", // maps to onEnter, onLeave, onEnterBack, onLeaveBack
         }
     });
@@ -959,7 +904,6 @@ function drawChart(medianByTract) {
                 drawLollipop();
             },
             onEnterBack: function(){
-                console.log("entering back")
                 drawLollipop();
             }
         }
@@ -972,64 +916,32 @@ function drawChart(medianByTract) {
             end: "bottom 80%",
             onEnter: function(){
                 d3.selectAll(".lollipopDiv").remove();
-                drawIA("Westchester", 200000, "small");
-                drawIA("Bronx", 200000, "small");
-                drawIA("Erie", 200000, "small");
-                drawIA("Kings", 200000, "small");
-                drawIA("Nassau", 200000, "small");
-                drawIA("New York", 200000, "small");
-                drawIA("Queens", 200000, "small");
-                drawIA("Suffolk", 200000, "small");                        
+                drawIA("Westchester", 200000, "small", 2);
+                drawIA("Bronx", 200000, "small", 2);
+                drawIA("Erie", 200000, "small", 2);
+                drawIA("Kings", 200000, "small", 2);
+                drawIA("Nassau", 200000, "small", 2);
+                drawIA("New York", 200000, "small", 2);
+                drawIA("Queens", 200000, "small", 2);
+                drawIA("Suffolk", 200000, "small", 2);                        
             }
         }
     })
 
-    document.getElementById("withoutID").addEventListener("click", function(){
-        var svgCount = d3.selectAll("svg").size();
-
-        // d3.selectAll("svg")
-        //     .transition()
-        //     .duration(500)
-        //     .style("opacity", 0)
-        //     .on("end", function(){
-
-        //         svgCount --;
-        //         d3.select(this).remove();
-
-        //         if(svgCount === 0){
-        //             d3.selectAll("svg").remove()
-        //             drawIA("Westchester", 200000, "small");
-        //                     drawIA("Bronx", 200000, "small");
-        //                     drawIA("Erie", 200000, "small");
-        //                     drawIA("Kings", 200000, "small");
-        //                     drawIA("Nassau", 200000, "small");
-        //                     drawIA("New York", 200000, "small");
-        //                     drawIA("Queens", 200000, "small");
-        //                     drawIA("Suffolk", 200000, "small");           
-        //         }
-        //     })
-
-        d3.selectAll("svg").remove()
-        drawIA("Westchester", 200000, "small");
-        drawIA("Bronx", 200000, "small");
-        drawIA("Erie", 200000, "small");
-        drawIA("Kings", 200000, "small");
-        drawIA("Nassau", 200000, "small");
-        drawIA("New York", 200000, "small");
-        drawIA("Queens", 200000, "small");
-        drawIA("Suffolk", 200000, "small");   
-    })
-
-    document.getElementById("withID").addEventListener("click", function(){
-        d3.selectAll("svg").remove()
-            drawHist("Westchester", 90, "small");
-            drawHist("Bronx", 90, "small");
-            drawHist("Erie", 90, "small");
-            drawHist("Kings", 90, "small");
-            drawHist("Nassau", 90, "small");
-            drawHist("New York", 90, "small");
-            drawHist("Queens", 90, "small");
-            drawHist("Suffolk", 90, "small");
+    
+    
+    var checkbox = document.getElementById("toggleSwitch")
+    
+    checkbox.addEventListener('change', function(){
+        if(this.checked){
+            drawHist("Westchester", 90, "small", 1);
+            drawHist("Bronx", 90, "small", 1);
+            drawHist("Erie", 90, "small", 1);
+            drawHist("Kings", 90, "small", 1);
+            drawHist("Nassau", 90, "small", 1);
+            drawHist("New York", 90, "small", 1);
+            drawHist("Queens", 90, "small", 1);
+            drawHist("Suffolk", 90, "small", 1);
             d3.selectAll(".yAxis .domain").style("stroke", "blue")
             d3.selectAll(".xAxis .domain").style("stroke", "blue")
             d3.selectAll(".tick").remove()
@@ -1040,10 +952,6 @@ function drawChart(medianByTract) {
                 .attr("y", 70)
                 .attr("x", svgWidth - margin.right - 80)
                 .style("text-anchor", "end")
-            d3.selectAll(".yLabel")
-                .style("font-size", 18)
-                .attr("x", -20)
-                .attr("y", 18)
             d3.selectAll(".xLabel")
                 .style("font-size", 18)
                 .attr("y", svgHeight - 24)
@@ -1082,7 +990,75 @@ function drawChart(medianByTract) {
                 .duration(500)
                 .attr("opacity", 1);
             d3.selectAll(".chartTitle").attr("opacity", 1)
-    })
+            /* TOGGLE */
+            d3.selectAll(".yLabel")
+                .style("font-size", 18)
+                .attr("x", -20)
+                .attr("y", 18)
+                .attr("opacity", 0)
+            d3.selectAll(".yAxis")
+                .transition()
+                .duration(500)
+                .attr("opacity", 0)
+            d3.selectAll("text")
+                .filter(function(){
+                    return d3.select(this).text() == "200"
+                })
+                .transition()
+                .duration(500)
+                .attr("opacity", 0)
+                d3.selectAll("text")
+                .filter(function(){
+                    return d3.select(this).text() == "90"
+                })
+                .transition()
+                .duration(500)
+                .attr("opacity", 0)
+                // add image to .container1
+                // d3.select(".container1")
+                //     .append("img")
+                //     .attr("class", "image")
+                //     .attr("src", "./images/scaleExplain.png")
+                //     .attr("width", 200)
+                //     .attr("height", 50)
+
+        }  else {
+            d3.select(".container1")
+                .selectAll(".chartArea")
+                .selectAll(".histDiv")
+                .selectAll("svg")   
+                .transition().duration(1000)
+                .attr("opacity", 0)
+                .on("end", function(){
+                    d3.select(this)
+                        .remove()           
+                })
+                /* TOGGLE */
+                d3.selectAll(".yLabel")
+                    .style("font-size", 18)
+                    .attr("x", -20)
+                    .attr("y", 18)
+                    .attr("opacity", 1)
+                d3.selectAll(".yAxis")
+                    .transition()
+                    .duration(500)
+                    .attr("opacity", 1)
+                d3.selectAll("text")
+                    .filter(function(){
+                        return d3.select(this).text() == "200"
+                    })
+                    .transition()
+                    .duration(500)
+                    .attr("opacity", 1)
+                d3.selectAll("text")
+                    .filter(function(){
+                        return d3.select(this).text() == "90"
+                    })
+                    .transition()
+                    .duration(500)
+                    .attr("opacity", 0)
+        } 
+    }) 
 
     const startElement = document.querySelector('.gsap-marker-start');
     // console.log(startElement);
