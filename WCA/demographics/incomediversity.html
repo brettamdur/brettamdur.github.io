@@ -21,7 +21,9 @@
         function checkDeviceType() {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-            if (isMobile) {
+            const isWindowSmall = window.matchMedia("only screen and (max-width: 600px)").matches;
+
+            if (isMobile || isWindowSmall) {
                 window.location.href = "incomediversitymobile.html";
             } else {
                 window.location.href = "incomediversitycontent.html";
@@ -31,6 +33,4 @@
 </head>
 <body onload="checkDeviceType()">
 </body>
-
-
 </html>
