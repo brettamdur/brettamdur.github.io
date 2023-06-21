@@ -1,0 +1,56 @@
+<!-- p*5>lorem100 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      overflow: auto;
+    }
+    .scrollable {
+      overflow: auto;
+      height: 100%;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // apply to iframe only
+      $('iframe').on('wheel', function(e) {
+        e.preventDefault();
+        var delta = e.originalEvent.deltaY;
+        $(window).scrollTop($(window).scrollTop() + delta);
+      });
+    });
+  </script>
+</head>
+<body>
+    Hello World
+
+    <div class="scrollable" style="min-height:510px; background-color:lightblue" ></div>
+
+    <iframe src="https://brettamdur.github.io/WCA/posts/post1/post1.html" width="100%" height="1290px" frameborder="0" scrolling="yes"></iframe>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Westchester Demographics: Post 1</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/post1.css">
+</head>
+<body>
+    Hello World
+
+    <div style="min-height:510px; background-color:lightblue" ></div>
+
+    <iframe src="https://brettamdur.github.io/WCA/posts/post1/post1.html" width="100%" height="1290px" frameborder="0" scrolling="yes"></iframe>
+
+</body>
+</html> -->
