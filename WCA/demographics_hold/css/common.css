@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+img {
+    display: block;
+    width: 100%;
+}
+.container {
+    margin: 3em auto;
+    max-width: 850px;
+    padding: 10px;
+    font-size: 15px;
+}
+a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.subtitle {
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+.signature {
+    font-size: .9em;
+    margin-bottom: 3em;
+}
+
+
+.bar-chart-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin.bottom: 30em
+    max-width: 750px;  /* using this for WCA webpage */
+}
+
+.bar-chart-wrapper .bar-chart-steps {
+    flex-basis: 30%;
+    padding-right: 2em;
+}
+
+.bar-chart-wrapper .bar-chart-steps > div {
+    height: 150vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bar-chart-wrapper .to-pin {
+    flex-basis: 70%;
+    /* ADDED BY BA: */
+    height: 100%;
+}
+
+.bar-chart-wrapper .chart-body {
+    height: 100vh;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+}
+
+.chart-body{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.container1, .container2 {
+    position: absolute;  /* This allows the divs to be placed in the same place */
+    top: 0;  /* Top and left are set to 0 to start the divs from the top left corner */
+    left: 0;  /* of the .chart-body div */
+    width: 100%;  /* The divs take the full width of the .chart-body div */
+    height: 100%;  /* The divs take the full height of the .chart-body div */
+  }
+
+.container1 {
+    z-index: 1;
+    opacity: .7
+}
+
+
+
+.chart-body svg {
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    .bar-chart-wrapper {
+        flex-direction: column-reverse;
+        position: relative;
+        padding-right: 0;
+    }
+
+    .bar-chart-wrapper .chart-body {
+        height: auto;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-top: 3em;
+        padding-bottom: 2em;
+        background-color: white;
+    }
+
+    .bar-chart-wrapper .bar-chart-steps {
+        padding-top: 100vh;
+        padding-right: 0;
+    }
+
+    .bar-chart-wrapper .bar-chart-steps > div {
+        justify-content: start;
+    }
+}
+
+.chart-title {
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+}
+
+.chart-title > div:nth-child(2) {
+    position: absolute;
+    top: -.75em;
+    left: 0;
+    width: 100%;
+    visibility: hidden;
+}
+
+.afterChartsText {
+    margin-top: 6em;
+}
+
+.chartArea{
+    display: inline-flex;
+    position: relative;
+}
+
+.histDiv{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.chartContent{
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.toggleContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* .toggleDiv{
+    display: inline-flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    /* margin: 0 1em; */
+} */
+

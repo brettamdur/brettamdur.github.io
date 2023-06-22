@@ -694,66 +694,12 @@ function drawChart(medianByTract) {
                 
     }
 
-    
-    // changes a histogram from one scale to another
-    function redrawHist(scaleBreadth) {
-        
-        var scaleCreator = (scaleBreadth == "smaller") ?
-            function (){
-                return d3.scaleLinear()
-                    .domain([0, 90])
-                    .range([height, margin.top])
-            }
-            :
-            function (){
-                return d3.scaleLinear()
-                    .domain([0, 20])
-                    .range([height, margin.top])
-            }
-
-        newYScale = scaleCreator(); 
-        
-        var newYAxis = d3.axisLeft(newYScale).tickSizeOuter(0);
-
-        var xScale = d3.scaleLinear()
-            .domain([0, d3.max(medianByTract, d => +d.estimate / 1000)])
-            .range([margin.left, width])            
-
-        d3.selectAll(".yAxis")
-            .transition()
-            .duration(1000)
-            // .call(d3.axisLeft(newYScale))
-            .call(newYAxis)
-            // .attr("font-size", 8)
-
-        d3.select(".yAxis .tick").style("opacity", 0)
-
-        d3.selectAll("rect")
-            .transition()
-            .duration(1000)
-            .attr("transform", d => "translate(" + xScale(d.x0) + "," + newYScale(d.length) + ")")
-            .attr("height", function(d) { return height - newYScale(d.length); })
-    }
-
-    // changes histogram from one size to another
-    // function transitionSVGs(sizing) {
-    //     return d3.selectAll("svg")
-    //         .style("transform-origin", "top left")
-    //         .transition()
-    //         .duration(1000)
-    //         .attr("width", function() {
-    //             return sizing == "smaller" ? width / 2 : width + margin.left + margin.right;
-    //         })
-    //         .attr("height", function() {
-    //             return sizing == "smaller" ? height / 2 : height + margin.top + margin.bottom;
-    //         })
-
-    // }
+    drawHist("Westchester", undefined, "large", 1);
 
 
-    // ////////////////////////////////////////////
-    // //// SCROLL TRIGGER ////////////////////////
-    // ////////////////////////////////////////////
+    ////////////////////////////////////////////
+    //// SCROLL TRIGGER ////////////////////////
+    ////////////////////////////////////////////
 
     ScrollTrigger.create({
         // NOTE: this doesn't animate anything.  It just pins the chart area to the middle of the screen while scrolling through the steps.
@@ -762,147 +708,71 @@ function drawChart(medianByTract) {
         end: "bottom 80%", // "When the bottom of the trigger element hits a point 80% of the way down the viewport, end the animation."
         pin: ".to-pin",  
         pinSpacing: false,
-        scrub: true,
+        // onLeave: () => transitionSVGs,
+        // onEnterBack: () => transitionSVGs,
         onEnter: function() {
+            updateStartStatus("P E");
         },
-        // when user scrolls down past the entire scrollTrigger area
         onLeave: function() {
-            // wait one second, then remove all of the children of container1
-            setTimeout(function() {
-                d3.selectAll(".container1 .chartArea").remove()
-                // select the .chartTitle in the histDiv with id "Westchester" and change its text
-                d3.select("#Westchester .chartTitle").text("Westchester")
-                
-            }
-            , 1000)
+            updateEndStatus("P L");
         },
-        // when user scrolls back up past the entire scrollTrigger area
-        onLeaveBack: function() {
-            // wait one second, then remove all the chartArea divs
-            setTimeout(function() {
-                d3.selectAll(".chartArea").remove()
-                drawHist("Westchester", undefined, "large", 1);
-            }, 2000)
-        },
-        markers: false,
+        markers: false
     })
 
-    ScrollTrigger.create({
-        trigger: "#step1",
-        start: "top top",  
-        end: "bottom 80%", 
-        onEnterBack: function() {
-            console.log("enter back 1")
-            // transitionSVGs("larger");
-            redrawHist("larger");
+    gsap.to("svg", {   
+        scrollTrigger: {
+            trigger: "#step1",
+            start: "top top",  
+            end: "bottom 80%", 
+            onEnterBack: function() {
+                updateStartStatus("S1 EB");
+                transitionSVGs("larger");
+                redrawHist("larger");
+            },
+            // markers: true,
+            onEnter: updateStartStatus("S1 E"),
+            onLeave: updateEndStatus("S1 L"),
+            onLeaveBack: updateEndStatus("S1 LB"),
         }
-    })
+    });
 
-    ScrollTrigger.create({ 
-        trigger: "#step2",  
-        start: "top 20%",  
-        end: "bottom 80%",
-        onEnter: function() {
-            // smaller here means smaller scale, not smaller svg:
-            redrawHist("smaller"); 
-        },
-        onEnterBack: function() {
-            d3.selectAll(".histDiv")
-                .transition()
-                .duration(1000)
-                .style("opacity", 0)
-                .on("end", function(){
-                    d3.selectAll("svg").remove()
-                    .transition()
-                    .duration(1000)
-                    drawHist("Westchester", 90, "large", 1);
-                })
-            // d3.selectAll(".histDiv svg").remove()
-            // drawHist("Westchester", 90, "large", 1);
-        }
-    })
-
-    ScrollTrigger.create({
-        trigger: "#step3",  
-        start: "top 20%",  
-        end: "bottom 80%",
-        // ON ENTER AND ENTERBACK ARE IDENTICAL.  PUT THIS INTO A FUNCTION.
-        onEnter: function(){
-            // d3.selectAll("#chartArea").remove();
-            d3.selectAll("svg").transition().duration(1000)
-            .style("opacity", 0)
-                .on("end", function(){
-                    d3.selectAll(".chartArea").remove()
-                    drawHist("Westchester", 90, "small", 1);
-                    drawHist("Bronx", 90, "small" ,1);
-                    drawHist("Erie", 90, "small", 1);
-                    drawHist("Kings", 90, "small", 1);
-                    drawHist("Nassau", 90, "small", 1);
-                    drawHist("New York", 90, "small", 1);
-                    drawHist("Queens", 90, "small", 1);
-                    drawHist("Suffolk", 90, "small", 1);
-                    d3.selectAll(".yAxis .domain").style("stroke", "blue")
-                    d3.selectAll(".xAxis .domain").style("stroke", "blue")
-                    d3.selectAll(".tick").remove()
-                    d3.select(".chartTitle").text("Westchester")
-                    d3.selectAll(".chartTitle")
-                        .style("font-weight", 600)
-                        .style("font-size", 18)
-                        .attr("y", 70)
-                        .attr("x", svgWidth - margin.right - 80)
-                        .style("text-anchor", "end")
-                    d3.selectAll(".yLabel")
-                        .style("font-size", 18)
-                        .attr("x", -20)
-                        .attr("y", 18)
-                    d3.selectAll(".xLabel")
-                        .style("font-size", 18)
-                        .attr("y", svgHeight - 24)
-                        // .on("end", function(){
-                        //     return d3.selectAll("svg")
-                        //     .transition()
-                        //     .duration(100)
-                        //     .attr("opacity", 1)
-                        // })
-                    d3.selectAll("svg")
-                        .append("text")
-                        .attr("class", "lightAxisValue")
-                        .attr("x", svgWidth - margin.right - 34)
-                        .attr("y", svgHeight - 38)
-                        .attr("text-anchor", "end")
-                        .style("font-size", 16)
-                        .text("250+")
-                    d3.selectAll("svg")
-                        .append("text")
-                        .attr("class", "lightAxisValue")
-                        .attr("x", margin.left)
-                        .attr("y", svgHeight - 38)
-                        .attr("text-anchor", "end")
-                        .style("font-size", 16)
-                        .text("0")
-                    d3.selectAll("svg")
-                        .append("text")
-                        .attr("class", "lightAxisValue")
-                        .attr("x", margin.left)
-                        .attr("y", margin.top + 16)
-                        .attr("text-anchor", "end")
-                        .style("font-size", 16)
-                        .text("90")
-                    d3.selectAll("svg")
-                        .transition()
-                        .duration(500)
-                        .attr("opacity", 1);
-                    d3.selectAll(".chartTitle").attr("opacity", 1)
-                })
-        },
-        onEnterBack: function(){
-            console.log("enter back 3")
-            d3.selectAll("svg").transition().duration(1000).style("opacity", 0)
+    gsap.to("svg", {   // select the svg elements
+        scrollTrigger: {
+            trigger: "#step2",  
+            start: "top 20%",  
+            end: "bottom 80%",
+            onEnter: function() {
+                updateStartStatus("S2 E");
+                redrawHist("smaller");
+            },
+            onEnterBack: function() {
+                d3.selectAll(".histDiv").transition().duration(1000)
+                    .style("opacity", 0)
                     .on("end", function(){
-                        console.log("end 3")
                         d3.selectAll("svg").remove()
+                        .transition()
+                        .duration(1000)
+                        drawHist("Westchester", 90, "large", 1);
+                    })
+            }
+
+        }
+    });
+
+    gsap.to("svg", {   
+        scrollTrigger: {
+            trigger: "#step3",  
+            start: "top 20%",  
+            end: "bottom 80%",
+            // ON ENTER AND ENTERBACK ARE IDENTICAL.  PUT THIS INTO A FUNCTION.
+            onEnter: function(){
+                // d3.selectAll("#chartArea").remove();
+                d3.selectAll("svg").transition().duration(1000)
+                .style("opacity", 0)
+                    .on("end", function(){
+                        d3.selectAll(".chartArea").remove()
                         drawHist("Westchester", 90, "small", 1);
-                        drawHist("Bronx", 90, "small", 1);
+                        drawHist("Bronx", 90, "small" ,1);
                         drawHist("Erie", 90, "small", 1);
                         drawHist("Kings", 90, "small", 1);
                         drawHist("Nassau", 90, "small", 1);
@@ -962,10 +832,79 @@ function drawChart(medianByTract) {
                             .attr("opacity", 1);
                         d3.selectAll(".chartTitle").attr("opacity", 1)
                     })
+            },
+            onEnterBack: function(){
+                console.log("enter back 3")
+                d3.selectAll("svg").transition().duration(1000).style("opacity", 0)
+                        .on("end", function(){
+                            console.log("end 3")
+                            d3.selectAll("svg").remove()
+                            drawHist("Westchester", 90, "small", 1);
+                            drawHist("Bronx", 90, "small", 1);
+                            drawHist("Erie", 90, "small", 1);
+                            drawHist("Kings", 90, "small", 1);
+                            drawHist("Nassau", 90, "small", 1);
+                            drawHist("New York", 90, "small", 1);
+                            drawHist("Queens", 90, "small", 1);
+                            drawHist("Suffolk", 90, "small", 1);
+                            d3.selectAll(".yAxis .domain").style("stroke", "blue")
+                            d3.selectAll(".xAxis .domain").style("stroke", "blue")
+                            d3.selectAll(".tick").remove()
+                            d3.select(".chartTitle").text("Westchester")
+                            d3.selectAll(".chartTitle")
+                                .style("font-weight", 600)
+                                .style("font-size", 18)
+                                .attr("y", 70)
+                                .attr("x", svgWidth - margin.right - 80)
+                                .style("text-anchor", "end")
+                            d3.selectAll(".yLabel")
+                                .style("font-size", 18)
+                                .attr("x", -20)
+                                .attr("y", 18)
+                            d3.selectAll(".xLabel")
+                                .style("font-size", 18)
+                                .attr("y", svgHeight - 24)
+                                // .on("end", function(){
+                                //     return d3.selectAll("svg")
+                                //     .transition()
+                                //     .duration(100)
+                                //     .attr("opacity", 1)
+                                // })
+                            d3.selectAll("svg")
+                                .append("text")
+                                .attr("class", "lightAxisValue")
+                                .attr("x", svgWidth - margin.right - 34)
+                                .attr("y", svgHeight - 38)
+                                .attr("text-anchor", "end")
+                                .style("font-size", 16)
+                                .text("250+")
+                            d3.selectAll("svg")
+                                .append("text")
+                                .attr("class", "lightAxisValue")
+                                .attr("x", margin.left)
+                                .attr("y", svgHeight - 38)
+                                .attr("text-anchor", "end")
+                                .style("font-size", 16)
+                                .text("0")
+                            d3.selectAll("svg")
+                                .append("text")
+                                .attr("class", "lightAxisValue")
+                                .attr("x", margin.left)
+                                .attr("y", margin.top + 16)
+                                .attr("text-anchor", "end")
+                                .style("font-size", 16)
+                                .text("90")
+                            d3.selectAll("svg")
+                                .transition()
+                                .duration(500)
+                                .attr("opacity", 1);
+                            d3.selectAll(".chartTitle").attr("opacity", 1)
+                        })
           },
-    })
-
-    
+        //   markers: true,
+          // toggleActions: "play none reverse reverse", // maps to onEnter, onLeave, onEnterBack, onLeaveBack
+        }
+    });
 
     let step5Animation;
     let step5Started = false;
@@ -1171,23 +1110,71 @@ function drawChart(medianByTract) {
         } 
     }) 
 
-    // const startElement = document.querySelector('.gsap-marker-start');
-    // // console.log(startElement);
-    // const endElement = document.querySelector('.gsap-marker-end');
+    const startElement = document.querySelector('.gsap-marker-start');
+    // console.log(startElement);
+    const endElement = document.querySelector('.gsap-marker-end');
 
-    // function updateStartStatus(message){
-    //     // startElement.textContent = message;
-    //     // console.log(message);
-    // }
+    function updateStartStatus(message){
+        // startElement.textContent = message;
+        // console.log(message);
+    }
 
-    // function updateEndStatus(message){
-    //     // endElement.textContent = message;
-    //     // console.log(message);
-    // }
+    function updateEndStatus(message){
+        // endElement.textContent = message;
+        // console.log(message);
+    }
 
-    drawHist("Westchester", undefined, "large", 1);
-    // drawHist("Westchester", undefined, "small", 1);
-    // drawHist("Bronx", undefined, "large", 1);
-    
+    function redrawHist(scaleBreadth) {
+        
+        var scaleCreator = (scaleBreadth == "smaller") ?
+            function (){
+                return d3.scaleLinear()
+                    .domain([0, 90])
+                    .range([height, margin.top])
+            }
+            :
+            function (){
+                return d3.scaleLinear()
+                    .domain([0, 20])
+                    .range([height, margin.top])
+            }
+
+        newYScale = scaleCreator(); 
+        
+        var newYAxis = d3.axisLeft(newYScale).tickSizeOuter(0);
+
+        var xScale = d3.scaleLinear()
+            .domain([0, d3.max(medianByTract, d => +d.estimate / 1000)])
+            .range([margin.left, width])            
+
+        d3.selectAll(".yAxis")
+            .transition()
+            .duration(1000)
+            // .call(d3.axisLeft(newYScale))
+            .call(newYAxis)
+            // .attr("font-size", 8)
+
+        d3.select(".yAxis .tick").style("opacity", 0)
+
+        d3.selectAll("rect")
+            .transition()
+            .duration(1000)
+            .attr("transform", d => "translate(" + xScale(d.x0) + "," + newYScale(d.length) + ")")
+            .attr("height", function(d) { return height - newYScale(d.length); })
+    }
+
+    function transitionSVGs(sizing) {
+        return d3.selectAll("svg")
+            .style("transform-origin", "top left")
+            .transition()
+            .duration(1000)
+            .attr("width", function() {
+                return sizing == "smaller" ? width / 2 : width + margin.left + margin.right;
+            })
+            .attr("height", function() {
+                return sizing == "smaller" ? height / 2 : height + margin.top + margin.bottom;
+            })
+
+    }
 }
 
