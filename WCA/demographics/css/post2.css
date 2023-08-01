@@ -1,0 +1,67 @@
+/* body, html {
+        overflow: hidden;
+  } */
+
+/* iframe {
+        overflow: hidden;
+} */
+
+.heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5em;
+}
+.heading h1 {
+    flex-basis: 60%;
+    margin: 0;
+}
+
+.heading img {
+    flex-basis: 30%;
+    max-width: 30%;
+}
+
+#chartArea {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin-top: 25px;
+    max-width: 900px;
+    justify-content: center; */
+}
+
+  
+.axes {
+    width: 75%;
+    height: auto; /* maintain aspect ratio */
+    /* center items with this class inside their container*/
+    margin-left: 5px;
+    margin-right: auto;
+    margin-top: 20px;
+}
+  
+  
+
+/* ***************** */
+
+
+
+@media (max-width: 700px) {
+    .heading h1,
+    .heading img {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    .heading img {
+        margin: 2em 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .bar-chart-wrapper .bar-chart-steps > div:last-child {
+        margin-bottom: -60vh;
+    }
+}
+
+
